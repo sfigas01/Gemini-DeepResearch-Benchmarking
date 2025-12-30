@@ -71,36 +71,27 @@
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center gap-2">
-                        <span class="text-2xl text-teal-700">❖</span>
-                        <h1 class="font-bold text-xl tracking-tight text-slate-800">GovBenchmark<span
-                                class="font-light text-slate-500">Analytics</span></h1>
-                    </div>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <button onclick="router('summary')" id="nav-summary"
-                        class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors">Executive
-                        Summary</button>
-                    <button onclick="router('kpi')" id="nav-kpi"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">KPI
-                        Gap Analysis</button>
-                    <button onclick="router('roi')" id="nav-roi"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">ROI
-                        Simulator</button>
-                    <button onclick="router('opportunities')" id="nav-opportunities"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Strategic
-                        Opportunities</button>
-                </div>
-                <!-- Mobile Menu Button (Functional but simplified UI for SPA) -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-slate-800 focus:outline-none">
-                        <span class="text-2xl">☰</span>
-                    </button>
-                </div>
-            </div>
+        <div class="hidden md:flex space-x-8 items-center">
+            <button onclick="router('summary')" id="nav-summary"
+                class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors">Executive
+                Summary</button>
+            <button onclick="router('kpi')" id="nav-kpi"
+                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">KPI
+                Gap Analysis</button>
+            <button onclick="router('roi')" id="nav-roi"
+                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">ROI
+                Simulator</button>
+            <button onclick="router('opportunities')" id="nav-opportunities"
+                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Strategic
+                Opportunities</button>
+        </div>
+        <!-- Mobile Menu Button (Functional but simplified UI for SPA) -->
+        <div class="md:hidden flex items-center">
+            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-slate-800 focus:outline-none">
+                <span class="text-2xl">☰</span>
+            </button>
+        </div>
+        </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
