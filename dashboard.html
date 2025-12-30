@@ -49,20 +49,39 @@
             color: #0f766e;
             font-weight: 600;
         }
+
+        /* Tech Stack Architecture Styling */
+        .stack-layer {
+            transition: all 0.3s ease;
+        }
+
+        .stack-card {
+            transition: all 0.3s ease;
+        }
+
+        .stack-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0f766e;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #0f766e;
+        }
     </style>
-    <!-- Chosen Palette: "Warm Professional" - Grounded in Warm Neutral (Stone-50/100) with Navy Blue (Slate-800) for text/structure and Teal/Amber accents for data visualization to convey trust and opportunity. -->
-    <!-- Application Structure Plan: Dashboard Layout. 
-         1. Executive Summary: Radar chart for holistic comparison.
-         2. KPI Gap Analysis: Interactive comparisons of Speed, Quality, and Cost (Banks/Insurance vs Gov).
-         3. Case Studies & Trends: Private sector success stories card grid.
-         4. ROI Simulator: Interactive calculator where users adjust 'Digital Adoption' and 'Automation' levels to see potential savings (Cost per Transaction logic).
-         5. Strategic Opportunities: Ranked list of high-impact areas.
-         Why: This structure allows the user to first understand the 'Problem' (Gap), see the 'Proof' (Case Studies), calculate the 'Value' (ROI), and finally review the 'Plan' (Opportunities). -->
-    <!-- Visualization & Content Choices: 
-         - Radar Chart: Ideal for multi-axis comparison (Service vs Tech vs Speed).
-         - Bar/Line Charts: Best for direct KPI comparison (Minutes wait, Days to process).
-         - Interactive Calculator: Demonstrates the 'Cost per Transaction' shift dynamically, far better than a static table.
-         - Flow/Process Elements: HTML/CSS styled boxes to show the "As-Is" vs "To-Be" journey without SVG/Mermaid. 
+    <!-- Chosen Palette: "Warm Professional" - Grounded in Warm Neutral (Stone-50/100) with Navy Blue (Slate-800) for text/structure and Teal/Amber accents. -->
+    <!-- Application Structure Plan: 
+         Updated to include 'Tech Stack Strategy' section.
+         1. Executive Summary
+         2. KPI Gap Analysis
+         3. ROI Simulator
+         4. Strategic Opportunities
+         5. [NEW] Tech Stack Strategy: Interactive "Legacy vs Target" architecture diagram showing the shift from Monoliths to Microservices/AI to enable Straight Through Processing.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
@@ -73,41 +92,32 @@
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-
-                <!-- Left: Back Link & Branding -->
-                <div class="flex items-center gap-6">
-                    <a href="index.html"
-                        class="text-slate-500 hover:text-teal-600 text-sm font-medium flex items-center gap-1 transition-colors group">
-                        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Home
-                    </a>
-                    <div class="h-6 w-px bg-stone-300 hidden sm:block"></div>
-                    <div class="hidden sm:flex items-center gap-2">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
                         <span class="text-2xl text-teal-700">❖</span>
                         <h1 class="font-bold text-xl tracking-tight text-slate-800">GovBenchmark<span
                                 class="font-light text-slate-500">Analytics</span></h1>
                     </div>
                 </div>
-
-                <!-- Right: Desktop Navigation -->
-                <div class="hidden md:flex space-x-2 items-center">
+                <div class="hidden md:flex space-x-6 items-center">
                     <button onclick="router('summary')" id="nav-summary"
-                        class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors rounded-md">Executive
+                        class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors">Executive
                         Summary</button>
                     <button onclick="router('kpi')" id="nav-kpi"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">KPI
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">KPI
                         Gap Analysis</button>
                     <button onclick="router('roi')" id="nav-roi"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">ROI
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">ROI
                         Simulator</button>
                     <button onclick="router('opportunities')" id="nav-opportunities"
-                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">Strategic
-                        Opportunities</button>
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Opportunities</button>
+                    <button onclick="router('tech')" id="nav-tech"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors border-l border-stone-300 pl-6">Tech
+                        Stack Strategy</button>
                 </div>
-
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()"
-                        class="text-slate-500 hover:text-slate-800 focus:outline-none p-2">
+                    <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-slate-800 focus:outline-none">
                         <span class="text-2xl">☰</span>
                     </button>
                 </div>
@@ -126,8 +136,10 @@
                     class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">ROI
                     Simulator</button>
                 <button onclick="router('opportunities')"
-                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Strategic
-                    Opportunities</button>
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Opportunities</button>
+                <button onclick="router('tech')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Tech
+                    Stack Strategy</button>
             </div>
         </div>
     </nav>
@@ -551,6 +563,97 @@
             </div>
         </section>
 
+        <!-- SECTION 5: TECH STACK STRATEGY (NEW) -->
+        <section id="view-tech" class="hidden space-y-8 animate-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Enabling Tech Stack</h2>
+                    <p class="text-slate-600 mt-2 max-w-2xl">
+                        To close the "Velocity Gap" and enable <span class="font-semibold text-teal-700">Straight
+                            Through Processing (STP)</span>, the architecture must shift from legacy monoliths to a
+                        composable, event-driven ecosystem.
+                    </p>
+                </div>
+                <!-- Toggle Switch -->
+                <div
+                    class="flex items-center gap-3 mt-4 md:mt-0 bg-white p-2 rounded-lg border border-stone-200 shadow-sm">
+                    <span id="label-legacy" class="text-sm font-semibold text-slate-500">View Legacy Barriers</span>
+                    <div
+                        class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="stack-toggle"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-stone-300"
+                            onclick="toggleStackView()" />
+                        <label for="stack-toggle"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-stone-300 cursor-pointer"></label>
+                    </div>
+                    <span id="label-target" class="text-sm font-semibold text-teal-600">View Target State</span>
+                </div>
+            </div>
+
+            <!-- Architecture Grid -->
+            <div class="grid grid-cols-1 gap-6 relative">
+
+                <!-- Layer 1: Experience & Intake -->
+                <div class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 1: Experience &
+                            Intake</h3>
+                        <span id="badge-l1" class="px-2 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded">Target
+                            State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l1">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Layer 2: Intelligence & Decisioning (The Core of STP) -->
+                <div
+                    class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 2: Intelligence
+                                & Decisioning (STP Engine)</h3>
+                            <span id="badge-l2"
+                                class="px-2 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded">Target
+                                State</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l2">
+                            <!-- Content populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 3: Integration & Data Fabric -->
+                <div class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 3: Integration &
+                            Data Fabric</h3>
+                        <span id="badge-l3"
+                            class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded">Target
+                            State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l3">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Layer 4: Systems of Record (Foundation) -->
+                <div class="stack-layer bg-stone-100 rounded-xl border border-stone-200 p-6 opacity-90">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">Layer 4: Systems of Record
+                        </h3>
+                        <span id="badge-l4"
+                            class="px-2 py-1 bg-stone-200 text-stone-600 text-xs font-bold rounded">Target State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="content-l4">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -574,10 +677,57 @@
                     phone: 12.00,
                     inPerson: 45.00
                 }
+            },
+            stackView: 'target' // 'target' or 'legacy'
+        };
+
+        // --- Data Store for Tech Stack ---
+        const stackData = {
+            target: {
+                l1: [
+                    { title: "Digital ID Wallet", icon: "🆔", desc: "Verifiable Credentials (OIDC/DIACC) for instant, passwordless login.", color: "border-teal-400" },
+                    { title: "Omnichannel Hub", icon: "📱", desc: "Unified frontend (React/Angular) ensuring consistent experience across Web & Mobile.", color: "border-teal-400" },
+                    { title: "Conversational AI", icon: "💬", desc: "NLP-driven Virtual Assistants for intake and triage (e.g., Azure Bot Svc).", color: "border-teal-400" }
+                ],
+                l2: [
+                    { title: "Rules Engine (BPA)", icon: "⚙️", desc: "Externalized business logic (Camunda/Drools) for instant eligibility decisions.", color: "border-amber-400" },
+                    { title: "Predictive ML", icon: "🧠", desc: "Real-time fraud scoring models (Python/TensorFlow) run *before* payment.", color: "border-amber-400" },
+                    { title: "Document AI", icon: "📄", desc: "OCR + LLM to extract data from uploaded PDFs/Images automatically.", color: "border-amber-400" }
+                ],
+                l3: [
+                    { title: "API Gateway", icon: "🔌", desc: "Secure REST/GraphQL layer (Apigee/Kong) decoupling frontend from backend.", color: "border-indigo-400" },
+                    { title: "Event Bus", icon: "⚡", desc: "Kafka/EventHub for real-time status updates across systems.", color: "border-indigo-400" },
+                    { title: "Data Lakehouse", icon: "💾", desc: "Unified data store (Snowflake/Databricks) for 360-degree citizen view.", color: "border-indigo-400" }
+                ],
+                l4: [
+                    { title: "Modernized Core", icon: "🏛️", desc: "Cloud-native ledgers and registers (Dynamics 365 / SAP S/4HANA).", color: "border-stone-400" },
+                    { title: "Wrapper APIs", icon: "📦", desc: "Encapsulation of remaining Mainframe logic to expose as services.", color: "border-stone-400" }
+                ]
+            },
+            legacy: {
+                l1: [
+                    { title: "Mailed Access Code", icon: "📮", desc: "Physical mail required for account creation (5-10 day delay).", color: "border-red-400" },
+                    { title: "Siloed Portals", icon: "🚧", desc: "Fragmented web experiences for EI, CPP, and OAS.", color: "border-red-400" },
+                    { title: "Static IVR", icon: "☎️", desc: "Phone trees requiring users to press numbers (High abandonment).", color: "border-red-400" }
+                ],
+                l2: [
+                    { title: "Manual Adjudication", icon: "✍️", desc: "Humans reading screens to apply policy logic.", color: "border-red-400" },
+                    { title: "Pay & Chase", icon: "🏃", desc: "Fraud detected via audits months after payment is issued.", color: "border-red-400" },
+                    { title: "Manual Data Entry", icon: "⌨️", desc: "Staff re-typing data from PDFs into mainframes.", color: "border-red-400" }
+                ],
+                l3: [
+                    { title: "Point-to-Point", icon: "🕸️", desc: "Brittle, hard-coded integrations that break easily.", color: "border-red-400" },
+                    { title: "Batch Processing", icon: "🕰️", desc: "Data moves overnight; status updates lag by 24-48 hours.", color: "border-red-400" },
+                    { title: "Data Silos", icon: "🗄️", desc: "Citizen data locked in separate departmental databases.", color: "border-red-400" }
+                ],
+                l4: [
+                    { title: "Mainframe Monolith", icon: "📠", desc: "COBOL-based legacy systems difficult to change.", color: "border-stone-400" },
+                    { title: "Paper Records", icon: "📁", desc: "Physical archives still required for certain document types.", color: "border-stone-400" }
+                ]
             }
         };
 
-        // --- Data Store ---
+        // --- Data Store for KPIs ---
         const kpiData = {
             callcenter: {
                 title: "Call Centre Metrics",
@@ -585,7 +735,7 @@
                 opportunity: "AI-First Triage could reduce ASA by 80%.",
                 chartLabel: "Average Speed of Answer (Minutes)",
                 labels: ['Service Canada (Peak)', 'Service Canada (Avg)', 'Private Insurance', 'Banking Sector'],
-                data: [45, 18, 3, 1], // Minutes
+                data: [45, 18, 3, 1],
                 colors: ['#ef4444', '#f59e0b', '#14b8a6', '#0f766e']
             },
             processing: {
@@ -594,7 +744,7 @@
                 opportunity: "Automated API integrations with payroll software (e.g., ADP/Ceridian) removes manual ROE validation.",
                 chartLabel: "Avg Processing Time (Days)",
                 labels: ['EI Claim (Gov)', 'OAS Application (Gov)', 'Private Disability Claim', 'Auto Insurance Claim'],
-                data: [28, 45, 14, 2], // Days
+                data: [28, 45, 14, 2],
                 colors: ['#ef4444', '#f59e0b', '#14b8a6', '#0f766e']
             },
             digital: {
@@ -603,7 +753,7 @@
                 opportunity: "Eliminating 'mail-out' codes via Digital ID adoption.",
                 chartLabel: "% Transactions Fully Digital",
                 labels: ['Service Canada', 'Telecoms', 'Private Insurance', 'Retail Banking'],
-                data: [42, 75, 85, 96], // Percent
+                data: [42, 75, 85, 96],
                 colors: ['#f59e0b', '#14b8a6', '#0f766e', '#0f766e']
             }
         };
@@ -617,16 +767,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             initSummaryChart();
             initROIChart();
-            calculateROI(); // Initial calc
-
-            // Render initial KPI chart hidden so it's ready
+            calculateROI();
             updateKPI('callcenter');
+            renderStack(); // Init stack view
         });
 
         // --- Router ---
         function router(viewId) {
             // Hide all views
-            ['summary', 'kpi', 'roi', 'opportunities'].forEach(id => {
+            ['summary', 'kpi', 'roi', 'opportunities', 'tech'].forEach(id => {
                 document.getElementById(`view-${id}`).classList.add('hidden');
                 document.getElementById(`nav-${id}`).classList.remove('nav-active', 'text-teal-600');
                 document.getElementById(`nav-${id}`).classList.add('text-slate-600');
@@ -640,7 +789,7 @@
             navBtn.classList.add('nav-active');
             navBtn.classList.remove('text-slate-600');
 
-            // Resize charts if needed when unhiding
+            // Resize charts
             if (viewId === 'summary' && summaryChart) summaryChart.resize();
             if (viewId === 'kpi' && kpiChart) kpiChart.resize();
             if (viewId === 'roi' && roiChart) roiChart.resize();
@@ -649,6 +798,61 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
+        }
+
+        // --- Tech Stack Logic ---
+        function toggleStackView() {
+            const checkbox = document.getElementById('stack-toggle');
+            state.stackView = checkbox.checked ? 'target' : 'legacy';
+
+            // UI State updates
+            const legacyLabel = document.getElementById('label-legacy');
+            const targetLabel = document.getElementById('label-target');
+
+            if (state.stackView === 'target') {
+                legacyLabel.classList.remove('text-slate-900', 'font-bold');
+                legacyLabel.classList.add('text-slate-500');
+                targetLabel.classList.add('text-teal-700', 'font-bold');
+                targetLabel.classList.remove('text-teal-600');
+            } else {
+                targetLabel.classList.remove('text-teal-700', 'font-bold');
+                targetLabel.classList.add('text-teal-600');
+                legacyLabel.classList.add('text-slate-900', 'font-bold');
+                legacyLabel.classList.remove('text-slate-500');
+            }
+
+            renderStack();
+        }
+
+        function renderStack() {
+            const data = stackData[state.stackView];
+            const badges = ['l1', 'l2', 'l3', 'l4'];
+
+            // Update Badges
+            badges.forEach(b => {
+                const el = document.getElementById(`badge-${b}`);
+                if (state.stackView === 'target') {
+                    el.innerText = "Target State";
+                    el.className = b === 'l2' ? "px-2 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded" : "px-2 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded";
+                } else {
+                    el.innerText = "Current Barrier";
+                    el.className = "px-2 py-1 bg-red-100 text-red-800 text-xs font-bold rounded";
+                }
+            });
+
+            // Render Grids
+            ['l1', 'l2', 'l3', 'l4'].forEach(layer => {
+                const container = document.getElementById(`content-${layer}`);
+                container.innerHTML = data[layer].map(item => `
+                    <div class="stack-card bg-white p-4 rounded-lg border-l-4 ${item.color} shadow-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">${item.icon}</span>
+                            <h4 class="font-bold text-slate-800 text-sm">${item.title}</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-snug">${item.desc}</p>
+                    </div>
+                `).join('');
+            });
         }
 
         // --- Visualization Logic ---
@@ -798,29 +1002,22 @@
         }
 
         function calculateROI() {
-            // Get inputs
             const volume = parseInt(document.getElementById('roi-volume').value);
             const digitalTarget = parseInt(document.getElementById('slider-digital').value);
             const automationLevel = parseInt(document.getElementById('slider-auto').value);
 
-            // Update UI Labels
             document.getElementById('digital-val').innerText = digitalTarget + '%';
             document.getElementById('auto-val').innerText = automationLevel + '%';
 
-            // Constants
             const currentMix = { digital: 0.40, phone: 0.40, inPerson: 0.20 };
             const costs = state.roi.costs;
 
-            // Adjusted Costs (Automation lowers phone/in-person handling time/cost)
-            // Assuming 1% auto reduces manual cost by 0.5%
             const automatedPhoneCost = costs.phone * (1 - (automationLevel * 0.005));
             const automatedPersonCost = costs.inPerson * (1 - (automationLevel * 0.002));
 
-            // Target Mix (Shift volume to digital)
-            // Remaining volume split between phone/person based on current ratio
             const remaining = 100 - digitalTarget;
-            const phoneRatio = currentMix.phone / (currentMix.phone + currentMix.inPerson); // 66% of remainder
-            const personRatio = currentMix.inPerson / (currentMix.phone + currentMix.inPerson); // 33% of remainder
+            const phoneRatio = currentMix.phone / (currentMix.phone + currentMix.inPerson);
+            const personRatio = currentMix.inPerson / (currentMix.phone + currentMix.inPerson);
 
             const targetMix = {
                 digital: digitalTarget / 100,
@@ -828,7 +1025,6 @@
                 inPerson: (remaining * personRatio) / 100
             };
 
-            // Calculate Totals
             const currentTotal = (volume * currentMix.digital * costs.digital) +
                 (volume * currentMix.phone * costs.phone) +
                 (volume * currentMix.inPerson * costs.inPerson);
@@ -839,15 +1035,12 @@
 
             const savings = currentTotal - projectedTotal;
 
-            // Update Text
             document.getElementById('cost-current').innerText = '$' + (currentTotal / 1000000).toFixed(1) + 'M';
             document.getElementById('cost-projected').innerText = '$' + (projectedTotal / 1000000).toFixed(1) + 'M';
             document.getElementById('savings-val').innerText = '$' + (savings / 1000000).toFixed(1) + 'M';
             document.getElementById('savings-val').className = savings > 0 ? "text-2xl font-bold text-teal-600" : "text-2xl font-bold text-slate-600";
 
-            // Update Chart Data
             if (roiChart) {
-                // Dataset 0: Digital, 1: Phone, 2: InPerson
                 roiChart.data.datasets[0].data = [
                     volume * currentMix.digital * costs.digital,
                     volume * targetMix.digital * costs.digital
