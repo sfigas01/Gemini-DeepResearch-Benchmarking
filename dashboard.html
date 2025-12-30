@@ -71,27 +71,47 @@
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
-        <div class="hidden md:flex space-x-8 items-center">
-            <button onclick="router('summary')" id="nav-summary"
-                class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors">Executive
-                Summary</button>
-            <button onclick="router('kpi')" id="nav-kpi"
-                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">KPI
-                Gap Analysis</button>
-            <button onclick="router('roi')" id="nav-roi"
-                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">ROI
-                Simulator</button>
-            <button onclick="router('opportunities')" id="nav-opportunities"
-                class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Strategic
-                Opportunities</button>
-        </div>
-        <!-- Mobile Menu Button (Functional but simplified UI for SPA) -->
-        <div class="md:hidden flex items-center">
-            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-slate-800 focus:outline-none">
-                <span class="text-2xl">☰</span>
-            </button>
-        </div>
-        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+
+                <!-- Left: Back Link & Branding -->
+                <div class="flex items-center gap-6">
+                    <a href="index.html"
+                        class="text-slate-500 hover:text-teal-600 text-sm font-medium flex items-center gap-1 transition-colors group">
+                        <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Home
+                    </a>
+                    <div class="h-6 w-px bg-stone-300 hidden sm:block"></div>
+                    <div class="hidden sm:flex items-center gap-2">
+                        <span class="text-2xl text-teal-700">❖</span>
+                        <h1 class="font-bold text-xl tracking-tight text-slate-800">GovBenchmark<span
+                                class="font-light text-slate-500">Analytics</span></h1>
+                    </div>
+                </div>
+
+                <!-- Right: Desktop Navigation -->
+                <div class="hidden md:flex space-x-2 items-center">
+                    <button onclick="router('summary')" id="nav-summary"
+                        class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors rounded-md">Executive
+                        Summary</button>
+                    <button onclick="router('kpi')" id="nav-kpi"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">KPI
+                        Gap Analysis</button>
+                    <button onclick="router('roi')" id="nav-roi"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">ROI
+                        Simulator</button>
+                    <button onclick="router('opportunities')" id="nav-opportunities"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors rounded-md">Strategic
+                        Opportunities</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()"
+                        class="text-slate-500 hover:text-slate-800 focus:outline-none p-2">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
