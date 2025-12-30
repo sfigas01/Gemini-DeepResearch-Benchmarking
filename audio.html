@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Overview | Service Canada Benchmarking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-stone-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-slate-500 hover:text-teal-600 text-sm font-medium flex items-center gap-2">
+                ← Back to Home
+            </a>
+            <span
+                class="inline-flex items-center gap-2 bg-pink-50 text-pink-700 px-3 py-1 rounded-full text-xs font-medium">
+                🎧 Audio Overview
+            </span>
+        </div>
+    </header>
+
+    <!-- Audio Content -->
+    <main class="max-w-2xl mx-auto px-6 py-16">
+        <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-8 text-center">
+            <div
+                class="bg-pink-100 text-pink-700 w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                🎧
+            </div>
+            <h1 class="text-2xl font-bold text-slate-800 mb-2">
+                Why Service Canada Is Thirty Times Slower
+            </h1>
+            <p class="text-slate-500 mb-8">
+                An AI-generated audio summary of the research findings.
+            </p>
+
+            <!-- Audio Player -->
+            <div class="bg-stone-50 rounded-lg p-6">
+                <audio controls class="w-full">
+                    <source src="Why Service Canada Is Thirty Times Slower.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <p class="text-xs text-slate-400 mt-6 italic">
+                Generated with Gemini AI • December 2024
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 text-sm">
+        <p>Built with Gemini AI</p>
+    </footer>
+</body>
+
+</html>

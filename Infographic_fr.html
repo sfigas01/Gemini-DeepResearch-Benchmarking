@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'écart de modernisation : Service Canada vs Chefs de file de l'industrie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            /* Slate-50 */
+            color: #1E293B;
+            /* Slate-800 */
+        }
+
+        /* Chart Container Styling - Mandatory Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            /* Slightly wider for infographic feel */
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            /* Blue-500 */
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB;
+            /* Blue-600 */
+        }
+
+        /* Flowchart Connector Line */
+        .flow-connector {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background-color: #CBD5E1;
+            /* Slate-300 */
+            z-index: 0;
+        }
+    </style>
+    <!-- Chosen Palette: "Brilliant Blues" - High contrast, authoritative yet modern. 
+         Primary: Blue-600 (#2563EB)
+         Secondary: Teal-500 (#14B8A6)
+         Accent: Amber-500 (#F59E0B)
+         Backgrounds: Slate-50/100
+    -->
+    <!-- Application Structure Plan:
+         1. Hero Header: Title and executive summary hook.
+         2. The Speed Gap: Comparative Horizontal Bar Chart (Days vs Hours).
+         3. The Cost Reality: Vertical Bar Chart emphasizing the x450 cost difference.
+         4. Process Comparison: Side-by-side HTML Flowchart (Analog vs Digital).
+         5. Strategic Opportunities: Radar Chart comparing capabilities.
+         6. ROI Forecast: Line/Area chart showing potential savings.
+         Why: Linear narrative flow (Problem -> Evidence -> Solution -> Result).
+    -->
+    <!-- Visualization & Content Choices:
+         - Speed Gap -> Compare -> Horizontal Bar -> Clear visual of time disparity.
+         - Cost Reality -> Compare -> Bar Chart -> Magnitude of cost inefficiency.
+         - Process -> Organize -> HTML Flowchart -> Visualizing complexity vs simplicity without SVG.
+         - Opportunities -> Organize -> Radar Chart -> Multi-dimensional comparison of capabilities.
+         - ROI -> Change -> Area Chart -> Visualizing cumulative value over time.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+
+<body class="antialiased">
+
+    <!-- HERO SECTION -->
+    <header class="bg-blue-700 text-white pt-16 pb-24 px-4 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-blue-800 text-blue-200 text-sm font-semibold mb-4 tracking-wide uppercase">Rapport
+                d'analyse comparative</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">L'écart de modernisation</h1>
+            <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                Comparaison des mesures de rendement de Service Canada par rapport aux chefs de file du secteur privé
+                dans les domaines bancaire et des assurances. Les données révèlent une occasion massive de
+                transformation technologique.
+            </p>
+        </div>
+        <!-- Decorative Circle (CSS only) -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-600 opacity-50 z-0"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-blue-500 opacity-50 z-0"></div>
+    </header>
+
+    <!-- METRIC HIGHLIGHTS STRIP -->
+    <div class="max-w-6xl mx-auto px-4 -mt-16 relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Metric 1 -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-amber-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="text-4xl font-bold text-slate-800 mb-2">28 c. 2</div>
+                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Jours de traitement</div>
+                <p class="text-slate-600 mt-2 text-sm">Service Canada c. Réclamations automatisées en assurance privée.
+                </p>
+            </div>
+            <!-- Metric 2 -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-teal-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="text-4xl font-bold text-slate-800 mb-2">450x</div>
+                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Différence de coût</div>
+                <p class="text-slate-600 mt-2 text-sm">Coût du service en personne c. transaction numérique en
+                    libre-service.</p>
+            </div>
+            <!-- Metric 3 -->
+            <div
+                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-blue-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="text-4xl font-bold text-slate-800 mb-2">400 M$</div>
+                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Économies potentielles</div>
+                <p class="text-slate-600 mt-2 text-sm">Rendement annuel grâce à des initiatives de modernisation
+                    ciblées.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: THE SPEED GAP -->
+    <section class="py-16 md:py-24 max-w-5xl mx-auto px-4">
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4 border-l-8 border-amber-500 pl-4">Le déficit de rapidité
+            </h2>
+            <p class="text-lg text-slate-600">
+                Le temps est la devise principale de la satisfaction des citoyens. Alors que les assureurs privés ont
+                atteint le « traitement direct » pour les réclamations simples, les flux de travail gouvernementaux
+                demeurent lourdement manuels.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+            <h3 class="text-xl font-semibold text-slate-800 mb-2">Comparaison des délais de traitement (Jours)</h3>
+            <p class="text-sm text-slate-500 mb-6">Comparaison des délais moyens de traitement de bout en bout pour des
+                demandes standardisées.</p>
+
+            <!-- Chart Container -->
+            <div class="chart-container">
+                <canvas id="speedChart"></canvas>
+            </div>
+
+            <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <p class="text-sm text-slate-700">
+                    <strong class="text-blue-600">Aperçu :</strong> L'écart de 26 jours est principalement causé par la
+                    vérification manuelle des documents (RE) qui pourrait être automatisée via des intégrations API, une
+                    pratique courante dans le secteur des assurances depuis 2015.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE COST REALITY -->
+    <section class="py-16 bg-blue-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="mb-10 text-center md:text-right">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 border-r-8 border-teal-500 pr-4">Le prix de la
+                    friction</h2>
+                <p class="text-lg text-slate-600">
+                    Les canaux numériques ne sont pas seulement pratiques; ils sont exponentiellement moins coûteux. Les
+                    banques privées migrent agressivement les utilisateurs vers les applications mobiles (coûtant des
+                    sous) pour subventionner les services-conseils à haute valeur.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Chart Col -->
+                <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 order-2 md:order-1">
+                    <h3 class="text-xl font-semibold text-slate-800 mb-6">Coût par transaction selon le canal</h3>
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Text Analysis Col -->
+                <div class="flex flex-col justify-center order-1 md:order-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-600">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-3">🏛️</span>
+                            <h4 class="font-bold text-slate-800">Service en personne</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">
+                            Nécessite une infrastructure physique, de la sécurité et du temps de personnel dédié.
+                            <span class="font-bold text-red-600 block mt-1">Coût : ~45,00 $</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-teal-500">
+                        <div class="flex items-center mb-2">
+                            <span class="text-2xl mr-3">📱</span>
+                            <h4 class="font-bold text-slate-800">Libre-service numérique</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm">
+                            Évolutif, automatisé et disponible 24/7.
+                            <span class="font-bold text-green-600 block mt-1">Coût : ~0,10 $</span>
+                        </p>
+                    </div>
+
+                    <p class="text-sm text-slate-500 italic">
+                        *Sources des données : Comptes publics du Canada et rapports d'analyse comparative du secteur
+                        privé (2023).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PROCESS ARCHITECTURE -->
+    <section class="py-16 md:py-24 max-w-5xl mx-auto px-4">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Inefficacité structurelle</h2>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                La comparaison du parcours utilisateur révèle la cause de l'écart. Le modèle gouvernemental repose sur
+                des « points de rupture » (courrier, examen manuel), tandis que l'industrie utilise des « ponts » (API,
+                IA).
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative">
+
+            <!-- Gov Process -->
+            <div class="relative">
+                <h3 class="text-center font-bold text-red-600 mb-8 uppercase tracking-widest text-sm">État actuel
+                    (Gouv.)</h3>
+
+                <div class="space-y-8">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10">
+                        <div class="font-bold text-slate-800">Demande en ligne</div>
+                        <div class="text-xs text-slate-500">L'usager soumet des données partielles</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 3.5rem;"></div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-red-50 p-4 rounded-lg shadow border border-red-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-red-800">Rupture : Envoi postal</div>
+                        <div class="text-xs text-red-600">Code d'accès envoyé par la poste (5-10 jours)</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 9.5rem;"></div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-slate-800">Examen manuel</div>
+                        <div class="text-xs text-slate-500">L'agent valide les documents</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 15.5rem;"></div>
+
+                    <!-- Step 4 -->
+                    <div
+                        class="bg-slate-100 p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-slate-600">Décision rendue</div>
+                        <div class="text-xs text-slate-500">Total : 28 jours</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry Process -->
+            <div class="relative">
+                <h3 class="text-center font-bold text-teal-600 mb-8 uppercase tracking-widest text-sm">État futur
+                    (Industrie)</h3>
+
+                <div class="space-y-8">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10">
+                        <div class="font-bold text-slate-800">Connexion à l'appli</div>
+                        <div class="text-xs text-slate-500">Authentification biométrique</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 3.5rem;"></div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-teal-50 p-4 rounded-lg shadow border border-teal-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-teal-800">API en temps réel</div>
+                        <div class="text-xs text-teal-600">Validation instantanée des données</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 9.5rem;"></div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-teal-50 p-4 rounded-lg shadow border border-teal-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-teal-800">Score de risque IA</div>
+                        <div class="text-xs text-teal-600">Logique d'approbation automatisée</div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 15.5rem;"></div>
+
+                    <!-- Step 4 -->
+                    <div
+                        class="bg-slate-100 p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
+                        <div class="font-bold text-slate-600">Dépôt instantané</div>
+                        <div class="text-xs text-slate-500">Total : < 24 heures</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- SECTION 4: CAPABILITY BENCHMARK -->
+    <section class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Analyse comparative de la maturité des
+                capacités</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Nous avons classé Service Canada par rapport aux grandes banques canadiennes dans cinq domaines
+                        clés. Les écarts les plus critiques se situent au niveau de la <strong>Prévention de la
+                            fraude</strong> (Réagir c. Prédire) et de l'<strong>Omnicanal</strong> (Déconnecté c.
+                        Transparent).
+                    </p>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <p class="font-bold text-blue-900 text-sm">Priorité stratégique :</p>
+                        <p class="text-blue-800 text-sm">Combler l'écart « omnicanal » générera la hausse immédiate la
+                            plus importante de la satisfaction des citoyens (CSAT).</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div class="chart-container">
+                        <canvas id="benchmarkRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: OPPORTUNITIES & ROI -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-blue-900 text-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">La voie à suivre</h2>
+                <p class="text-blue-200 text-lg">Occasions classées pour l'adoption au RCI le plus élevé.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Opportunity List -->
+                <div class="space-y-6">
+                    <!-- Item 1 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-amber-400">1. Identité numérique</h3>
+                                <p class="text-sm text-blue-100 mt-1">Remplacer les codes postaux par une connexion
+                                    vérifiée par la banque.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-2xl font-bold text-white">ÉLEVÉ</span>
+                                <span class="text-xs text-blue-300 uppercase">Impact</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-teal-400">2. Centre de contact IA</h3>
+                                <p class="text-sm text-blue-100 mt-1">Déployer l'IA vocale pour les vérifications de
+                                    statut.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-2xl font-bold text-white">MOYEN</span>
+                                <span class="text-xs text-blue-300 uppercase">Impact</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-400">3. Fraude prédictive</h3>
+                                <p class="text-sm text-blue-100 mt-1">Passer du « Payer et pourchasser » à la prévention
+                                    en temps réel.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-2xl font-bold text-white">MOYEN</span>
+                                <span class="text-xs text-blue-300 uppercase">Impact</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROI Chart -->
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <h3 class="text-xl font-semibold mb-6">Économies projetées (Horizon 5 ans)</h3>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                    <p class="text-xs text-blue-300 mt-4 text-center">Économies cumulatives basées sur un transfert
+                        annuel de 15 % vers le numérique.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-500 py-12 text-center text-sm">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="mb-2">Généré pour examen stratégique interne.</p>
+            <p>Données extrapolées à partir des rapports publics du gouvernement du Canada et de l'analyse de
+                l'industrie du secteur privé (2023-2024).</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Utility: Label Wrapping Helper (Mandatory) ---
+        function formatLabel(str, maxwidth) {
+            if (typeof str !== 'string' || str.length <= maxwidth) return str;
+            var sections = [];
+            var words = str.split(" ");
+            var temp = "";
+            words.forEach(function (item, index) {
+                if (temp.length > 0) {
+                    var concat = temp + ' ' + item;
+                    if (concat.length > maxwidth) {
+                        sections.push(temp);
+                        temp = "";
+                    } else {
+                        if (index == (words.length - 1)) {
+                            sections.push(concat);
+                            return;
+                        } else {
+                            temp = concat;
+                            return;
+                        }
+                    }
+                }
+                if (index == (words.length - 1)) {
+                    sections.push(item);
+                    return;
+                }
+                if (item.length < maxwidth) {
+                    temp = item;
+                } else {
+                    sections.push(item);
+                }
+            });
+            return sections;
+        }
+
+        // --- Common Chart Configuration ---
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748B'; // Slate-500
+
+        // 1. SPEED CHART (Horizontal Bar)
+        const speedCtx = document.getElementById('speedChart').getContext('2d');
+        new Chart(speedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Service Canada (Actuel)', 'Télécommunications', 'Assurance privée', 'Banques mondiales'],
+                datasets: [{
+                    label: 'Délai moyen de traitement (Jours)',
+                    data: [28, 5, 2, 1],
+                    backgroundColor: [
+                        '#EF4444', // Red for Gov (Slow)
+                        '#F59E0B', // Amber
+                        '#14B8A6', // Teal
+                        '#2563EB'  // Blue
+                    ],
+                    borderRadius: 6,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            },
+                            label: function (context) {
+                                return context.raw + ' Jours';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#E2E8F0' }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2. COST CHART (Bar)
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: ['En personne', 'Centre de contact', 'Libre-service numérique'],
+                datasets: [{
+                    label: 'Coût par transaction ($)',
+                    data: [45.00, 12.50, 0.10],
+                    backgroundColor: [
+                        '#2563EB', // Blue
+                        '#60A5FA', // Light Blue
+                        '#14B8A6'  // Teal
+                    ],
+                    borderRadius: 8,
+                    barThickness: 50
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            },
+                            label: function (context) {
+                                return context.raw.toFixed(2).replace('.', ',') + ' $';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#E2E8F0' },
+                        ticks: { callback: function (value) { return value + ' $'; } }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 3. RADAR BENCHMARK
+        const radarCtx = document.getElementById('benchmarkRadar').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    formatLabel('Vitesse de traitement', 16),
+                    formatLabel('Adoption numérique', 16),
+                    formatLabel('Prévention de la fraude', 16),
+                    formatLabel('Soutien omnicanal', 16),
+                    formatLabel('Efficacité des coûts', 16)
+                ],
+                datasets: [{
+                    label: 'Service Canada',
+                    data: [30, 42, 50, 40, 35],
+                    fill: true,
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)', // Red tint
+                    borderColor: '#EF4444',
+                    pointBackgroundColor: '#EF4444'
+                }, {
+                    label: 'Moyenne secteur privé',
+                    data: [90, 85, 80, 85, 90],
+                    fill: true,
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)', // Blue tint
+                    borderColor: '#2563EB',
+                    pointBackgroundColor: '#2563EB'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: {
+                            font: { size: 11, weight: 600 }
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. ROI FORECAST (Line/Area)
+        const roiCtx = document.getElementById('roiChart').getContext('2d');
+        new Chart(roiCtx, {
+            type: 'line',
+            data: {
+                labels: ['Année 1', 'Année 2', 'Année 3', 'Année 4', 'Année 5'],
+                datasets: [{
+                    label: 'Économies cumulées (Millions $)',
+                    data: [45, 120, 210, 320, 450],
+                    borderColor: '#14B8A6', // Teal
+                    backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            title: function (tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            },
+                            label: function (context) {
+                                return context.raw + ' M$ Économies';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#94A3B8' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#94A3B8', callback: function (val) { return val + ' M$' } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

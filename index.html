@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Deep Research Benchmarks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body class="bg-stone-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200">
+        <div class="max-w-4xl mx-auto px-6 py-12 text-center">
+            <img src="nano_banana.png" alt="Nano Banana Benchmarking Mascot" class="mx-auto h-32 mb-6 animate-bounce">
+            <div
+                class="inline-flex items-center gap-2 bg-teal-50 text-teal-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+                <span>✨</span> Powered by Gemini AI
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight mb-3">
+                Deep Research Benchmarks:<br>
+                <span class="text-teal-700">Service Canada Improvement Opportunities</span>
+            </h1>
+            <p class="text-lg text-slate-500 italic">
+                ...and it does an amazing job visually! 🎨
+            </p>
+        </div>
+    </header>
+
+    <!-- Content Grid -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <p class="text-center text-slate-600 mb-10">
+            Explore the outputs from this AI-assisted research project. Click any card to view.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Interactive Dashboard -->
+            <a href="dashboard.html"
+                class="card block bg-white rounded-xl border border-stone-200 p-6 hover:border-teal-300">
+                <div class="flex items-start gap-4">
+                    <div class="bg-teal-100 text-teal-700 p-3 rounded-lg text-2xl">📊</div>
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-800 mb-1">Interactive Dashboard</h2>
+                        <p class="text-sm text-slate-500">Explore the benchmarking data with charts, KPI comparisons,
+                            and an ROI simulator.</p>
+                        <span class="inline-block mt-3 text-sm font-medium text-teal-600">View Dashboard →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2: Infographic -->
+            <a href="infographic.html"
+                class="card block bg-white rounded-xl border border-stone-200 p-6 hover:border-amber-300">
+                <div class="flex items-start gap-4">
+                    <div class="bg-amber-100 text-amber-700 p-3 rounded-lg text-2xl">🎨</div>
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-800 mb-1">Coded Infographic</h2>
+                        <p class="text-sm text-slate-500">A visual summary of key findings rendered entirely in code.
+                        </p>
+                        <span class="inline-block mt-3 text-sm font-medium text-amber-600">View Infographic →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 3: Research Report -->
+            <a href="report.html"
+                class="card block bg-white rounded-xl border border-stone-200 p-6 hover:border-indigo-300">
+                <div class="flex items-start gap-4">
+                    <div class="bg-indigo-100 text-indigo-700 p-3 rounded-lg text-2xl">📄</div>
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-800 mb-1">Research Report</h2>
+                        <p class="text-sm text-slate-500">The full written analysis with detailed findings and
+                            recommendations.</p>
+                        <span class="inline-block mt-3 text-sm font-medium text-indigo-600">Read Report →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 4: Audio -->
+            <a href="audio.html"
+                class="card block bg-white rounded-xl border border-stone-200 p-6 hover:border-pink-300">
+                <div class="flex items-start gap-4">
+                    <div class="bg-pink-100 text-pink-700 p-3 rounded-lg text-2xl">🎧</div>
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-800 mb-1">Audio Overview</h2>
+                        <p class="text-sm text-slate-500">Listen to an AI-generated audio summary of the research.</p>
+                        <span class="inline-block mt-3 text-sm font-medium text-pink-600">Listen Now →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-slate-400 text-sm">
+        <p>Built with Gemini AI • December 2024</p>
+    </footer>
+</body>
+
+</html>
