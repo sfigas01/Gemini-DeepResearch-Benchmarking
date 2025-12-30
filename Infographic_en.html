@@ -4,684 +4,1058 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Modernization Gap: Service Canada vs. Industry Leaders</title>
+    <title>Service Canada Benchmark & Modernization Strategy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            /* Slate-50 */
-            color: #1E293B;
-            /* Slate-800 */
-        }
-
-        /* Chart Container Styling - Mandatory Requirements */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            /* Slightly wider for infographic feel */
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 500px;
-        }
-
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 300px;
-            }
-        }
-
-        /* Custom Scrollbar */
+        /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #F1F5F9;
+            background: #f1f1f1;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #3B82F6;
-            /* Blue-500 */
-            border-radius: 5px;
+            background: #cbd5e1;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #2563EB;
-            /* Blue-600 */
+            background: #94a3b8;
         }
 
-        /* Flowchart Connector Line */
-        .flow-connector {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 2rem;
-            background-color: #CBD5E1;
-            /* Slate-300 */
-            z-index: 0;
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Active navigation state */
+        .nav-active {
+            border-bottom: 2px solid #0f766e;
+            /* Teal-700 */
+            color: #0f766e;
+            font-weight: 600;
+        }
+
+        /* Tech Stack Architecture Styling */
+        .stack-layer {
+            transition: all 0.3s ease;
+        }
+
+        .stack-card {
+            transition: all 0.3s ease;
+        }
+
+        .stack-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0f766e;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #0f766e;
         }
     </style>
-    <!-- Chosen Palette: "Brilliant Blues" - High contrast, authoritative yet modern. 
-         Primary: Blue-600 (#2563EB)
-         Secondary: Teal-500 (#14B8A6)
-         Accent: Amber-500 (#F59E0B)
-         Backgrounds: Slate-50/100
-    -->
-    <!-- Application Structure Plan:
-         1. Hero Header: Title and executive summary hook.
-         2. The Speed Gap: Comparative Horizontal Bar Chart (Days vs Hours).
-         3. The Cost Reality: Vertical Bar Chart emphasizing the x450 cost difference.
-         4. Process Comparison: Side-by-side HTML Flowchart (Analog vs Digital).
-         5. Strategic Opportunities: Radar Chart comparing capabilities.
-         6. ROI Forecast: Line/Area chart showing potential savings.
-         Why: Linear narrative flow (Problem -> Evidence -> Solution -> Result).
-    -->
-    <!-- Visualization & Content Choices:
-         - Speed Gap -> Compare -> Horizontal Bar -> Clear visual of time disparity.
-         - Cost Reality -> Compare -> Bar Chart -> Magnitude of cost inefficiency.
-         - Process -> Organize -> HTML Flowchart -> Visualizing complexity vs simplicity without SVG.
-         - Opportunities -> Organize -> Radar Chart -> Multi-dimensional comparison of capabilities.
-         - ROI -> Change -> Area Chart -> Visualizing cumulative value over time.
+    <!-- Chosen Palette: "Warm Professional" - Grounded in Warm Neutral (Stone-50/100) with Navy Blue (Slate-800) for text/structure and Teal/Amber accents. -->
+    <!-- Application Structure Plan: 
+         Updated to include 'Tech Stack Strategy' section.
+         1. Executive Summary
+         2. KPI Gap Analysis
+         3. ROI Simulator
+         4. Strategic Opportunities
+         5. [NEW] Tech Stack Strategy: Interactive "Legacy vs Target" architecture diagram showing the shift from Monoliths to Microservices/AI to enable Straight Through Processing.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 
-<body class="antialiased">
+<body class="bg-stone-50 text-slate-800 font-sans antialiased selection:bg-teal-100 selection:text-teal-900">
 
-    <!-- HERO SECTION -->
-    <header class="bg-blue-700 text-white pt-8 pb-24 px-4 relative overflow-hidden">
-        <!-- Breadcrumb -->
-        <div class="max-w-5xl mx-auto mb-8 relative z-20">
-            <a href="infographic.html"
-                class="inline-flex items-center text-blue-200 hover:text-white text-sm font-medium transition-colors bg-blue-800/50 px-3 py-1.5 rounded-full hover:bg-blue-800">
-                &larr; Back to Selection
-            </a>
-        </div>
-
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <span
-                class="inline-block py-1 px-3 rounded-full bg-blue-800 text-blue-200 text-sm font-semibold mb-4 tracking-wide uppercase">Benchmarking
-                Research Report</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">The Modernization Gap</h1>
-            <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-                Comparing Service Canada's performance metrics against private sector leaders in Banking and Insurance.
-                The data reveals a massive opportunity for technological transformation.
-            </p>
-        </div>
-        <!-- Decorative Circle (CSS only) -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-600 opacity-50 z-0"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-blue-500 opacity-50 z-0"></div>
-    </header>
-
-    <!-- METRIC HIGHLIGHTS STRIP -->
-    <div class="max-w-6xl mx-auto px-4 -mt-16 relative z-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Metric 1 -->
-            <div
-                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-amber-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
-                <div class="text-4xl font-bold text-slate-800 mb-2">28 vs 2</div>
-                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Days to Process</div>
-                <p class="text-slate-600 mt-2 text-sm">Service Canada vs. Private Insurance automated claims.</p>
-            </div>
-            <!-- Metric 2 -->
-            <div
-                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-teal-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
-                <div class="text-4xl font-bold text-slate-800 mb-2">450x</div>
-                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Cost Difference</div>
-                <p class="text-slate-600 mt-2 text-sm">In-Person service cost vs. Digital self-service transaction.</p>
-            </div>
-            <!-- Metric 3 -->
-            <div
-                class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-blue-500 text-center transform hover:-translate-y-1 transition-transform duration-300">
-                <div class="text-4xl font-bold text-slate-800 mb-2">$400M</div>
-                <div class="text-sm font-bold text-slate-500 uppercase tracking-wider">Annual ROI</div>
-                <p class="text-slate-600 mt-2 text-sm">Potential savings through targeted modernization initiatives.</p>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="text-2xl text-teal-700">❖</span>
+                        <h1 class="font-bold text-xl tracking-tight text-slate-800">GovBenchmark<span
+                                class="font-light text-slate-500">Analytics</span></h1>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <button onclick="router('summary')" id="nav-summary"
+                        class="nav-active px-3 py-2 text-sm font-medium hover:text-teal-600 transition-colors">Executive
+                        Summary</button>
+                    <button onclick="router('kpi')" id="nav-kpi"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">KPI
+                        Gap Analysis</button>
+                    <button onclick="router('roi')" id="nav-roi"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">ROI
+                        Simulator</button>
+                    <button onclick="router('opportunities')" id="nav-opportunities"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors">Opportunities</button>
+                    <button onclick="router('tech')" id="nav-tech"
+                        class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors border-l border-stone-300 pl-6">Tech
+                        Stack Strategy</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-slate-800 focus:outline-none">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- SECTION 1: THE SPEED GAP -->
-    <section class="py-16 md:py-24 max-w-5xl mx-auto px-4">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4 border-l-8 border-amber-500 pl-4">The Velocity Deficit
-            </h2>
-            <p class="text-lg text-slate-600">
-                Time is the primary currency of citizen satisfaction. While private insurers have achieved "Straight
-                Through Processing" (STP) for simple claims, government workflows remain heavily manual.
-            </p>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <button onclick="router('summary')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Executive
+                    Summary</button>
+                <button onclick="router('kpi')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">KPI
+                    Gap Analysis</button>
+                <button onclick="router('roi')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">ROI
+                    Simulator</button>
+                <button onclick="router('opportunities')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Opportunities</button>
+                <button onclick="router('tech')"
+                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-stone-100">Tech
+                    Stack Strategy</button>
+            </div>
         </div>
+    </nav>
 
-        <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
-            <h3 class="text-xl font-semibold text-slate-800 mb-2">Processing Time Comparison (Days)</h3>
-            <p class="text-sm text-slate-500 mb-6">Comparing average end-to-end processing times for standardized
-                applications.</p>
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
 
-            <!-- Chart Container -->
-            <div class="chart-container">
-                <canvas id="speedChart"></canvas>
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <section id="view-summary" class="animate-fade-in block space-y-8">
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <span
+                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                            Research Findings
+                        </span>
+                        <h2 class="text-3xl font-bold text-slate-900">Service Canada vs. Private Sector: The
+                            Modernization Gap</h2>
+                        <p class="text-lg text-slate-600 leading-relaxed">
+                            This report benchmarks Service Canada's performance against private sector leaders in
+                            Banking and Insurance. While Service Canada provides critical support, significant gaps
+                            exist in digital maturity, processing speed, and accessibility.
+                        </p>
+                        <p class="text-slate-600">
+                            By adopting private sector best practices—specifically in <strong>AI-driven automation,
+                                unified digital platforms, and fraud prevention</strong>—Service Canada can drastically
+                            reduce wait times and operational costs while improving citizen satisfaction.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="bg-stone-50 p-4 rounded-lg border-l-4 border-amber-500">
+                                <p class="text-xs text-slate-500 uppercase tracking-wide">Processing Time Gap</p>
+                                <p class="text-2xl font-bold text-slate-800">14x Slower</p>
+                                <p class="text-sm text-slate-600">Than Ins. Automated Claims</p>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg border-l-4 border-teal-500">
+                                <p class="text-xs text-slate-500 uppercase tracking-wide">Potential Savings</p>
+                                <p class="text-2xl font-bold text-slate-800">$400M+</p>
+                                <p class="text-sm text-slate-600">Annual Operational ROI</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart: Radar Comparison -->
+                    <div class="bg-stone-50 rounded-xl p-4 flex flex-col items-center justify-center">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-2 w-full text-center">Service Maturity
+                            Benchmark</h3>
+                        <div class="chart-container">
+                            <canvas id="summaryRadarChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-500 mt-4 italic">Comparing Service Canada against
+                            weighted Private Sector Average (Banking/Insurance)</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
-                <p class="text-sm text-slate-700">
-                    <strong class="text-blue-600">Insight:</strong> The 26-day gap is primarily caused by manual
-                    verification of documents (ROEs) that could be automated via API integrations, a standard practice
-                    in the insurance sector since 2015.
+            <!-- Key Findings Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200 hover:shadow-md transition-shadow cursor-pointer"
+                    onclick="router('kpi')">
+                    <div class="text-teal-600 text-xl mb-3">⟳</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Service Velocity</h3>
+                    <p class="text-sm text-slate-600">Private insurers process simple claims in <24 hours. Service
+                            Canada targets 28 days for EI. Automation is the differentiator.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200 hover:shadow-md transition-shadow cursor-pointer"
+                    onclick="router('roi')">
+                    <div class="text-teal-600 text-xl mb-3">⍟</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Cost Efficiency</h3>
+                    <p class="text-sm text-slate-600">Digital transactions cost ~$0.10 vs ~$15.00+ for phone/in-person.
+                        Shifting volume is the highest ROI lever.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200 hover:shadow-md transition-shadow cursor-pointer"
+                    onclick="router('opportunities')">
+                    <div class="text-teal-600 text-xl mb-3">🛡</div>
+                    <h3 class="font-bold text-slate-800 mb-2">Fraud & Trust</h3>
+                    <p class="text-sm text-slate-600">Banks use real-time behavioral AI for fraud. Service Canada relies
+                        heavily on post-payment audits and manual review.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: KPI GAP ANALYSIS -->
+        <section id="view-kpi" class="hidden space-y-6">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">KPI Gap Analysis</h2>
+                <p class="text-slate-600 mt-2">
+                    A deep dive into specific performance metrics. Select a category below to compare Service Canada
+                    data against Insurance and Banking benchmarks. The gap highlights the potential for technological
+                    intervention.
                 </p>
             </div>
-        </div>
-    </section>
 
-    <!-- SECTION 2: THE COST REALITY -->
-    <section class="py-16 bg-blue-50">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="mb-10 text-center md:text-right">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4 border-r-8 border-teal-500 pr-4">The Price of Friction
-                </h2>
-                <p class="text-lg text-slate-600">
-                    Digital channels are not just convenient; they are exponentially cheaper. Private banks aggressively
-                    migrate users to mobile apps (costing pennies) to subsidize high-value advisory services.
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="border-b border-stone-200 bg-stone-50 px-6 py-4 flex flex-wrap gap-4">
+                    <button onclick="updateKPI('callcenter')" id="btn-callcenter"
+                        class="kpi-btn px-4 py-2 rounded-full text-sm font-medium bg-teal-600 text-white shadow-sm">Call
+                        Centre Metrics</button>
+                    <button onclick="updateKPI('processing')" id="btn-processing"
+                        class="kpi-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-slate-600 hover:bg-stone-200 border border-stone-300">Processing
+                        Speed</button>
+                    <button onclick="updateKPI('digital')" id="btn-digital"
+                        class="kpi-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-slate-600 hover:bg-stone-200 border border-stone-300">Digital
+                        Adoption</button>
+                </div>
+
+                <div class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Text Context -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <div id="kpi-text-content">
+                            <!-- Dynamic Content Inserted Here -->
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                            <h4 class="text-sm font-bold text-amber-800 mb-1">Tech Opportunity</h4>
+                            <p id="kpi-opportunity-text" class="text-sm text-amber-900 opacity-90">
+                                Implementation of Conversational AI (IVR) can reduce simple query volume by 40%.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Chart Display -->
+                    <div class="lg:col-span-2 bg-stone-50 rounded-xl p-4">
+                        <div class="chart-container">
+                            <canvas id="kpiBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Study Comparison Table -->
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6">
+                <h3 class="text-lg font-bold text-slate-800 mb-4">Case Study: The "Simple Claim" Journey</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                    Step</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                    Service Canada (Current)</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                    Private Insurance (Benchmark)</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                    Tech Gap</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-stone-200 text-sm">
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Submission</td>
+                                <td class="px-6 py-4 text-slate-600">Web Form + Mail Access Code</td>
+                                <td class="px-6 py-4 text-slate-600">Mobile App / Biometric Login</td>
+                                <td class="px-6 py-4 text-teal-600">Digital Identity Verification</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Validation</td>
+                                <td class="px-6 py-4 text-slate-600">Manual review of Record of Employment</td>
+                                <td class="px-6 py-4 text-slate-600">Automated Data Integration (Payroll APIs)</td>
+                                <td class="px-6 py-4 text-teal-600">Real-time Data Exchange</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-medium text-slate-900">Decision</td>
+                                <td class="px-6 py-4 text-slate-600">1-4 Weeks (Target 28 days)</td>
+                                <td class="px-6 py-4 text-slate-600">Instant to 48 Hours</td>
+                                <td class="px-6 py-4 text-teal-600">Algorithmic Decisioning</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ROI SIMULATOR -->
+        <section id="view-roi" class="hidden space-y-6">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">Modernization ROI Simulator</h2>
+                <p class="text-slate-600 mt-2">
+                    Service delivery costs vary wildly by channel. Private banks have aggressively moved customers to
+                    digital channels (costing ~$0.10) to subsidize complex in-person advisory. Use the controls to
+                    simulate the impact of shifting Service Canada volumes from Phone/In-Person to Digital/Self-Service.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Chart Col -->
-                <div class="bg-white rounded-2xl shadow-md p-6 md:p-8 order-2 md:order-1">
-                    <h3 class="text-xl font-semibold text-slate-800 mb-6">Cost Per Transaction by Channel</h3>
-                    <div class="chart-container" style="height: 350px;">
-                        <canvas id="costChart"></canvas>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Controls -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 space-y-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4 border-b pb-2">Simulation Controls</h3>
+
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Total Monthly Interactions</label>
+                        <select id="roi-volume"
+                            class="w-full bg-stone-50 border border-stone-300 rounded-md py-2 px-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-4"
+                            onchange="calculateROI()">
+                            <option value="1000000">1 Million (Pilot)</option>
+                            <option value="5000000" selected>5 Million (Regional)</option>
+                            <option value="20000000">20 Million (National)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-medium text-slate-700">Digital Channel Adoption</label>
+                            <span id="digital-val" class="text-sm font-bold text-teal-600">40%</span>
+                        </div>
+                        <input type="range" id="slider-digital" min="20" max="95" value="40"
+                            class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                            oninput="calculateROI()">
+                        <p class="text-xs text-slate-500 mt-1">Current SC ~40% vs Banks ~90%</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-medium text-slate-700">Automation Level (AI)</label>
+                            <span id="auto-val" class="text-sm font-bold text-teal-600">10%</span>
+                        </div>
+                        <input type="range" id="slider-auto" min="0" max="80" value="10"
+                            class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                            oninput="calculateROI()">
+                        <p class="text-xs text-slate-500 mt-1">Reduces Phone/In-Person handling time</p>
+                    </div>
+
+                    <div class="bg-teal-50 p-4 rounded-lg border border-teal-100 mt-6">
+                        <p class="text-sm text-teal-800 font-medium text-center">Benchmark Reference</p>
+                        <p class="text-xs text-teal-600 text-center mt-1">Private Banks achieve >90% Digital Adoption
+                            and >60% routine task automation.</p>
                     </div>
                 </div>
 
-                <!-- Text Analysis Col -->
-                <div class="flex flex-col justify-center order-1 md:order-2 space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-600">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-3">🏛️</span>
-                            <h4 class="font-bold text-slate-800">In-Person Service</h4>
+                <!-- Results Visualization -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Top Level Cards -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                            <p class="text-sm text-slate-500">Current Est. Monthly Cost</p>
+                            <h4 id="cost-current" class="text-3xl font-bold text-slate-800">$0M</h4>
                         </div>
-                        <p class="text-slate-600 text-sm">
-                            Requires physical infrastructure, security, and dedicated staff time.
-                            <span class="font-bold text-red-600 block mt-1">Cost: ~$45.00</span>
-                        </p>
+                        <div class="bg-white p-5 rounded-xl border-l-4 border-teal-500 shadow-sm">
+                            <p class="text-sm text-slate-500">Projected Monthly Cost</p>
+                            <h4 id="cost-projected" class="text-3xl font-bold text-teal-700">$0M</h4>
+                        </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-teal-500">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-3">📱</span>
-                            <h4 class="font-bold text-slate-800">Digital Self-Service</h4>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
+                        <div class="flex justify-between items-end mb-4">
+                            <h3 class="font-bold text-slate-700">Potential Savings</h3>
+                            <span id="savings-val" class="text-2xl font-bold text-teal-600">$0M</span>
                         </div>
-                        <p class="text-slate-600 text-sm">
-                            Scalable, automated, and available 24/7.
-                            <span class="font-bold text-green-600 block mt-1">Cost: ~$0.10</span>
-                        </p>
+                        <!-- Stacked Bar of Channel Mix Cost -->
+                        <div class="chart-container" style="height: 250px;">
+                            <canvas id="roiMixChart"></canvas>
+                        </div>
+                        <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs text-slate-500">
+                            <div>Digital ($0.50)</div>
+                            <div>Phone ($12.00)</div>
+                            <div>In-Person ($45.00)</div>
+                        </div>
                     </div>
-
-                    <p class="text-sm text-slate-500 italic">
-                        *Data sources: Public Accounts of Canada & Private Sector Benchmarking Reports (2023).
-                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 3: PROCESS ARCHITECTURE -->
-    <section class="py-16 md:py-24 max-w-5xl mx-auto px-4">
-        <div class="mb-12 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">Structural Inefficiency</h2>
-            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
-                Comparing the user journey reveals why the gap exists. The government model relies on "breakpoints"
-                (mail, manual review), while industry uses "bridges" (API, AI).
+        <!-- SECTION 4: STRATEGIC OPPORTUNITIES -->
+        <section id="view-opportunities" class="hidden space-y-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">Strategic Opportunities Ranking</h2>
+                <p class="text-slate-600 mt-2">
+                    Based on the benchmarking data, the following initiatives are ranked by ROI Potential (Impact vs
+                    Effort). Adopting these private sector practices represents the fastest path to modernization.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Opportunity Card 1 -->
+                <div
+                    class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 hover:shadow-md transition-all relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 right-0 bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        Rank #1</div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-teal-100 p-3 rounded-lg text-teal-700 text-2xl">🤖</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Unified Digital Identity & AI Intake</h3>
+                            <div class="flex items-center gap-2 mt-1 mb-3">
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">ROI: High</span>
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">Complexity:
+                                    High</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-3">
+                                <span class="font-semibold">Private Practice:</span> Banking apps use biometrics and
+                                automated document scanning (OCR) to onboard clients instantly.
+                            </p>
+                            <p class="text-sm text-slate-600">
+                                <span class="font-semibold">Gov Application:</span> Replace mailed access codes with
+                                bank-verified digital IDs. Use AI to pre-validate EI applications, reducing manual
+                                processing by 60%.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Progress bar for potential -->
+                    <div class="mt-4">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-semibold text-teal-700">Efficiency Impact</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full bg-stone-200 rounded-full h-2">
+                            <div class="bg-teal-600 h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunity Card 2 -->
+                <div
+                    class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 hover:shadow-md transition-all relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        Rank #2</div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-amber-100 p-3 rounded-lg text-amber-700 text-2xl">📞</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Conversational AI for Call Centers</h3>
+                            <div class="flex items-center gap-2 mt-1 mb-3">
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">ROI: Med-High</span>
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">Complexity:
+                                    Med</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-3">
+                                <span class="font-semibold">Private Practice:</span> Insurance firms use NLP to handle
+                                status checks and simple claims updates without human agents.
+                            </p>
+                            <p class="text-sm text-slate-600">
+                                <span class="font-semibold">Gov Application:</span> Deploy Voice AI to handle the top 3
+                                high-volume calls: "Where is my payment?", "Status Update", and "Form help", reducing
+                                wait times.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-semibold text-amber-700">Wait Time Reduction</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="w-full bg-stone-200 rounded-full h-2">
+                            <div class="bg-amber-500 h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunity Card 3 -->
+                <div
+                    class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 hover:shadow-md transition-all relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-slate-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        Rank #3</div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg text-indigo-700 text-2xl">🕵️</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Predictive Fraud Analytics</h3>
+                            <div class="flex items-center gap-2 mt-1 mb-3">
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">ROI: Med</span>
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">Complexity:
+                                    High</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-3">
+                                <span class="font-semibold">Private Practice:</span> Credit card companies block
+                                suspicious transactions in milliseconds using ML patterns.
+                            </p>
+                            <p class="text-sm text-slate-600">
+                                <span class="font-semibold">Gov Application:</span> Move from "Pay and Chase" (Audits)
+                                to "Prevent and Protect" using real-time data matching during application.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-semibold text-indigo-700">Loss Prevention</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="w-full bg-stone-200 rounded-full h-2">
+                            <div class="bg-indigo-500 h-2 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunity Card 4 -->
+                <div
+                    class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 hover:shadow-md transition-all relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-slate-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        Rank #4</div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-pink-100 p-3 rounded-lg text-pink-700 text-2xl">📱</div>
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800">Omnichannel Status Tracking</h3>
+                            <div class="flex items-center gap-2 mt-1 mb-3">
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">ROI: Med</span>
+                                <span class="text-xs bg-stone-100 px-2 py-1 rounded text-slate-600">Complexity:
+                                    Low</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-3">
+                                <span class="font-semibold">Private Practice:</span> "Domino's Pizza Tracker" style
+                                interfaces for complex processes (Mortgages, Claims).
+                            </p>
+                            <p class="text-sm text-slate-600">
+                                <span class="font-semibold">Gov Application:</span> Granular visibility into OAS/CPP
+                                application stages reduces anxiety-driven calls to the contact center.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="font-semibold text-pink-700">CSAT Improvement</span>
+                            <span>45%</span>
+                        </div>
+                        <div class="w-full bg-stone-200 rounded-full h-2">
+                            <div class="bg-pink-500 h-2 rounded-full" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TECH STACK STRATEGY (NEW) -->
+        <section id="view-tech" class="hidden space-y-8 animate-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Enabling Tech Stack</h2>
+                    <p class="text-slate-600 mt-2 max-w-2xl">
+                        To close the "Velocity Gap" and enable <span class="font-semibold text-teal-700">Straight
+                            Through Processing (STP)</span>, the architecture must shift from legacy monoliths to a
+                        composable, event-driven ecosystem.
+                    </p>
+                </div>
+                <!-- Toggle Switch -->
+                <div
+                    class="flex items-center gap-3 mt-4 md:mt-0 bg-white p-2 rounded-lg border border-stone-200 shadow-sm">
+                    <span id="label-legacy" class="text-sm font-semibold text-slate-500">View Legacy Barriers</span>
+                    <div
+                        class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="stack-toggle"
+                            class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-stone-300"
+                            onclick="toggleStackView()" />
+                        <label for="stack-toggle"
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-stone-300 cursor-pointer"></label>
+                    </div>
+                    <span id="label-target" class="text-sm font-semibold text-teal-600">View Target State</span>
+                </div>
+            </div>
+
+            <!-- Architecture Grid -->
+            <div class="grid grid-cols-1 gap-6 relative">
+
+                <!-- Layer 1: Experience & Intake -->
+                <div class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 1: Experience &
+                            Intake</h3>
+                        <span id="badge-l1" class="px-2 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded">Target
+                            State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l1">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Layer 2: Intelligence & Decisioning (The Core of STP) -->
+                <div
+                    class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 2: Intelligence
+                                & Decisioning (STP Engine)</h3>
+                            <span id="badge-l2"
+                                class="px-2 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded">Target
+                                State</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l2">
+                            <!-- Content populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 3: Integration & Data Fabric -->
+                <div class="stack-layer bg-white rounded-xl border border-stone-200 shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Layer 3: Integration &
+                            Data Fabric</h3>
+                        <span id="badge-l3"
+                            class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded">Target
+                            State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="content-l3">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Layer 4: Systems of Record (Foundation) -->
+                <div class="stack-layer bg-stone-100 rounded-xl border border-stone-200 p-6 opacity-90">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">Layer 4: Systems of Record
+                        </h3>
+                        <span id="badge-l4"
+                            class="px-2 py-1 bg-stone-200 text-stone-600 text-xs font-bold rounded">Target State</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="content-l4">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-400 text-sm">© 2024 Service Canada Benchmarking Research Simulation. Internal Use Only.
             </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative">
-
-            <!-- Gov Process -->
-            <div class="relative">
-                <h3 class="text-center font-bold text-red-600 mb-8 uppercase tracking-widest text-sm">Current State
-                    (Gov)</h3>
-
-                <div class="space-y-8">
-                    <!-- Step 1 -->
-                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10">
-                        <div class="font-bold text-slate-800">Online Application</div>
-                        <div class="text-xs text-slate-500">User submits partial data</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 3.5rem;"></div>
-
-                    <!-- Step 2 -->
-                    <div class="bg-red-50 p-4 rounded-lg shadow border border-red-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-red-800">Breakpoint: Mail Out</div>
-                        <div class="text-xs text-red-600">Access Code sent via Post (5-10 Days)</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 9.5rem;"></div>
-
-                    <!-- Step 3 -->
-                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-slate-800">Manual Review</div>
-                        <div class="text-xs text-slate-500">Agent validates documents</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-slate-300" style="top: 15.5rem;"></div>
-
-                    <!-- Step 4 -->
-                    <div
-                        class="bg-slate-100 p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-slate-600">Decision Issued</div>
-                        <div class="text-xs text-slate-500">Total: 28 Days</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Industry Process -->
-            <div class="relative">
-                <h3 class="text-center font-bold text-teal-600 mb-8 uppercase tracking-widest text-sm">Future State
-                    (Industry)</h3>
-
-                <div class="space-y-8">
-                    <!-- Step 1 -->
-                    <div class="bg-white p-4 rounded-lg shadow border border-slate-200 text-center relative z-10">
-                        <div class="font-bold text-slate-800">App Login</div>
-                        <div class="text-xs text-slate-500">Biometric Authentication</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 3.5rem;"></div>
-
-                    <!-- Step 2 -->
-                    <div class="bg-teal-50 p-4 rounded-lg shadow border border-teal-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-teal-800">Real-Time API</div>
-                        <div class="text-xs text-teal-600">Instant Data Validation</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 9.5rem;"></div>
-
-                    <!-- Step 3 -->
-                    <div class="bg-teal-50 p-4 rounded-lg shadow border border-teal-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-teal-800">AI Risk Scoring</div>
-                        <div class="text-xs text-teal-600">Automated Approval Logic</div>
-                    </div>
-
-                    <!-- Connector -->
-                    <div class="absolute left-1/2 -ml-0.5 w-1 h-8 bg-teal-200" style="top: 15.5rem;"></div>
-
-                    <!-- Step 4 -->
-                    <div
-                        class="bg-slate-100 p-4 rounded-lg shadow border border-slate-200 text-center relative z-10 mt-8">
-                        <div class="font-bold text-slate-600">Instant Deposit</div>
-                        <div class="text-xs text-slate-500">Total: < 24 Hours</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <!-- SECTION 4: CAPABILITY BENCHMARK -->
-    <section class="py-16 bg-white border-t border-slate-200">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Capability Maturity Benchmark</h2>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                <div class="lg:col-span-1 space-y-4">
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        We ranked Service Canada against top-tier Canadian Banks across five key domains. The most
-                        critical gaps are in <strong>Fraud Prevention</strong> (Reacting vs Predicting) and
-                        <strong>Omnichannel</strong> (Disconnected vs Seamless).
-                    </p>
-                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                        <p class="font-bold text-blue-900 text-sm">Strategic Priority:</p>
-                        <p class="text-blue-800 text-sm">Closing the "Omnichannel" gap will yield the highest immediate
-                            boost in Citizen Satisfaction (CSAT).</p>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-2">
-                    <div class="chart-container">
-                        <canvas id="benchmarkRadar"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 5: OPPORTUNITIES & ROI -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-blue-900 text-white">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">The Path Forward</h2>
-                <p class="text-blue-200 text-lg">Ranked opportunities for highest ROI adoption.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <!-- Opportunity List -->
-                <div class="space-y-6">
-                    <!-- Item 1 -->
-                    <div
-                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-amber-400">1. Digital Identity</h3>
-                                <p class="text-sm text-blue-100 mt-1">Replace mailed access codes with bank-verified
-                                    login.</p>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-2xl font-bold text-white">High</span>
-                                <span class="text-xs text-blue-300 uppercase">Impact</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div
-                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-teal-400">2. AI Contact Center</h3>
-                                <p class="text-sm text-blue-100 mt-1">Deploy Voice AI for status checks to reduce wait
-                                    times.</p>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-2xl font-bold text-white">Med</span>
-                                <span class="text-xs text-blue-300 uppercase">Impact</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div
-                        class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-colors">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl font-bold text-blue-400">3. Predictive Fraud</h3>
-                                <p class="text-sm text-blue-100 mt-1">Shift from "Pay & Chase" to real-time prevention.
-                                </p>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-2xl font-bold text-white">Med</span>
-                                <span class="text-xs text-blue-300 uppercase">Impact</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ROI Chart -->
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                    <h3 class="text-xl font-semibold mb-6">Projected Savings (5 Year Horizon)</h3>
-                    <div class="chart-container" style="height: 300px;">
-                        <canvas id="roiChart"></canvas>
-                    </div>
-                    <p class="text-xs text-blue-300 mt-4 text-center">Cumulative savings based on 15% annual shift to
-                        digital.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-500 py-12 text-center text-sm">
-        <div class="max-w-4xl mx-auto px-4">
-            <p class="mb-2">Generated for Internal Strategy Review.</p>
-            <p>Data extrapolated from publicly available Government of Canada reports and Private Sector industry
-                analysis (2023-2024).</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- Utility: Label Wrapping Helper (Mandatory) ---
-        function formatLabel(str, maxwidth) {
-            if (typeof str !== 'string' || str.length <= maxwidth) return str;
-            var sections = [];
-            var words = str.split(" ");
-            var temp = "";
-            words.forEach(function (item, index) {
-                if (temp.length > 0) {
-                    var concat = temp + ' ' + item;
-                    if (concat.length > maxwidth) {
-                        sections.push(temp);
-                        temp = "";
-                    } else {
-                        if (index == (words.length - 1)) {
-                            sections.push(concat);
-                            return;
-                        } else {
-                            temp = concat;
-                            return;
-                        }
-                    }
+        // --- State Management ---
+        const state = {
+            currentView: 'summary',
+            roi: {
+                volume: 5000000,
+                digitalAdoption: 40,
+                automation: 10,
+                costs: {
+                    digital: 0.50,
+                    phone: 12.00,
+                    inPerson: 45.00
                 }
-                if (index == (words.length - 1)) {
-                    sections.push(item);
-                    return;
-                }
-                if (item.length < maxwidth) {
-                    temp = item;
-                } else {
-                    sections.push(item);
-                }
+            },
+            stackView: 'target' // 'target' or 'legacy'
+        };
+
+        // --- Data Store for Tech Stack ---
+        const stackData = {
+            target: {
+                l1: [
+                    { title: "Digital ID Wallet", icon: "🆔", desc: "Verifiable Credentials (OIDC/DIACC) for instant, passwordless login.", color: "border-teal-400" },
+                    { title: "Omnichannel Hub", icon: "📱", desc: "Unified frontend (React/Angular) ensuring consistent experience across Web & Mobile.", color: "border-teal-400" },
+                    { title: "Conversational AI", icon: "💬", desc: "NLP-driven Virtual Assistants for intake and triage (e.g., Azure Bot Svc).", color: "border-teal-400" }
+                ],
+                l2: [
+                    { title: "Rules Engine (BPA)", icon: "⚙️", desc: "Externalized business logic (Camunda/Drools) for instant eligibility decisions.", color: "border-amber-400" },
+                    { title: "Predictive ML", icon: "🧠", desc: "Real-time fraud scoring models (Python/TensorFlow) run *before* payment.", color: "border-amber-400" },
+                    { title: "Document AI", icon: "📄", desc: "OCR + LLM to extract data from uploaded PDFs/Images automatically.", color: "border-amber-400" }
+                ],
+                l3: [
+                    { title: "API Gateway", icon: "🔌", desc: "Secure REST/GraphQL layer (Apigee/Kong) decoupling frontend from backend.", color: "border-indigo-400" },
+                    { title: "Event Bus", icon: "⚡", desc: "Kafka/EventHub for real-time status updates across systems.", color: "border-indigo-400" },
+                    { title: "Data Lakehouse", icon: "💾", desc: "Unified data store (Snowflake/Databricks) for 360-degree citizen view.", color: "border-indigo-400" }
+                ],
+                l4: [
+                    { title: "Modernized Core", icon: "🏛️", desc: "Cloud-native ledgers and registers (Dynamics 365 / SAP S/4HANA).", color: "border-stone-400" },
+                    { title: "Wrapper APIs", icon: "📦", desc: "Encapsulation of remaining Mainframe logic to expose as services.", color: "border-stone-400" }
+                ]
+            },
+            legacy: {
+                l1: [
+                    { title: "Mailed Access Code", icon: "📮", desc: "Physical mail required for account creation (5-10 day delay).", color: "border-red-400" },
+                    { title: "Siloed Portals", icon: "🚧", desc: "Fragmented web experiences for EI, CPP, and OAS.", color: "border-red-400" },
+                    { title: "Static IVR", icon: "☎️", desc: "Phone trees requiring users to press numbers (High abandonment).", color: "border-red-400" }
+                ],
+                l2: [
+                    { title: "Manual Adjudication", icon: "✍️", desc: "Humans reading screens to apply policy logic.", color: "border-red-400" },
+                    { title: "Pay & Chase", icon: "🏃", desc: "Fraud detected via audits months after payment is issued.", color: "border-red-400" },
+                    { title: "Manual Data Entry", icon: "⌨️", desc: "Staff re-typing data from PDFs into mainframes.", color: "border-red-400" }
+                ],
+                l3: [
+                    { title: "Point-to-Point", icon: "🕸️", desc: "Brittle, hard-coded integrations that break easily.", color: "border-red-400" },
+                    { title: "Batch Processing", icon: "🕰️", desc: "Data moves overnight; status updates lag by 24-48 hours.", color: "border-red-400" },
+                    { title: "Data Silos", icon: "🗄️", desc: "Citizen data locked in separate departmental databases.", color: "border-red-400" }
+                ],
+                l4: [
+                    { title: "Mainframe Monolith", icon: "📠", desc: "COBOL-based legacy systems difficult to change.", color: "border-stone-400" },
+                    { title: "Paper Records", icon: "📁", desc: "Physical archives still required for certain document types.", color: "border-stone-400" }
+                ]
+            }
+        };
+
+        // --- Data Store for KPIs ---
+        const kpiData = {
+            callcenter: {
+                title: "Call Centre Metrics",
+                desc: "While private sector contact centers prioritize 'Speed to Answer' (ASA) and 'First Call Resolution' (FCR), Service Canada struggles with high volumes and complex authentication processes. Private industry uses aggressive callback tech and AI triage.",
+                opportunity: "AI-First Triage could reduce ASA by 80%.",
+                chartLabel: "Average Speed of Answer (Minutes)",
+                labels: ['Service Canada (Peak)', 'Service Canada (Avg)', 'Private Insurance', 'Banking Sector'],
+                data: [45, 18, 3, 1],
+                colors: ['#ef4444', '#f59e0b', '#14b8a6', '#0f766e']
+            },
+            processing: {
+                title: "Processing Speed & Automation",
+                desc: "Private insurers have moved to 'Straight Through Processing' (STP) where algorithms approve simple claims instantly. Service Canada's manual validation of ROEs (Record of Employment) creates a massive bottleneck.",
+                opportunity: "Automated API integrations with payroll software (e.g., ADP/Ceridian) removes manual ROE validation.",
+                chartLabel: "Avg Processing Time (Days)",
+                labels: ['EI Claim (Gov)', 'OAS Application (Gov)', 'Private Disability Claim', 'Auto Insurance Claim'],
+                data: [28, 45, 14, 2],
+                colors: ['#ef4444', '#f59e0b', '#14b8a6', '#0f766e']
+            },
+            digital: {
+                title: "Digital Adoption & Maturity",
+                desc: "Banking apps are true 'End-to-End' platforms. Service Canada often offers 'Hybrid' digital services (Apply online -> Receive code by mail -> Return to online). This friction point causes high drop-off and channel switching.",
+                opportunity: "Eliminating 'mail-out' codes via Digital ID adoption.",
+                chartLabel: "% Transactions Fully Digital",
+                labels: ['Service Canada', 'Telecoms', 'Private Insurance', 'Retail Banking'],
+                data: [42, 75, 85, 96],
+                colors: ['#f59e0b', '#14b8a6', '#0f766e', '#0f766e']
+            }
+        };
+
+        // --- Chart Instances ---
+        let summaryChart = null;
+        let kpiChart = null;
+        let roiChart = null;
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initSummaryChart();
+            initROIChart();
+            calculateROI();
+            updateKPI('callcenter');
+            renderStack(); // Init stack view
+        });
+
+        // --- Router ---
+        function router(viewId) {
+            // Hide all views
+            ['summary', 'kpi', 'roi', 'opportunities', 'tech'].forEach(id => {
+                document.getElementById(`view-${id}`).classList.add('hidden');
+                document.getElementById(`nav-${id}`).classList.remove('nav-active', 'text-teal-600');
+                document.getElementById(`nav-${id}`).classList.add('text-slate-600');
             });
-            return sections;
+
+            // Show selected view
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+            // Update Nav
+            const navBtn = document.getElementById(`nav-${viewId}`);
+            navBtn.classList.add('nav-active');
+            navBtn.classList.remove('text-slate-600');
+
+            // Resize charts
+            if (viewId === 'summary' && summaryChart) summaryChart.resize();
+            if (viewId === 'kpi' && kpiChart) kpiChart.resize();
+            if (viewId === 'roi' && roiChart) roiChart.resize();
         }
 
-        // --- Common Chart Configuration ---
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = '#64748B'; // Slate-500
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
-        // 1. SPEED CHART (Horizontal Bar)
-        const speedCtx = document.getElementById('speedChart').getContext('2d');
-        new Chart(speedCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Service Canada (Current)', 'Telecoms', 'Private Insurance', 'Global Banks'],
-                datasets: [{
-                    label: 'Avg Processing Time (Days)',
-                    data: [28, 5, 2, 1],
-                    backgroundColor: [
-                        '#EF4444', // Red for Gov (Slow)
-                        '#F59E0B', // Amber
-                        '#14B8A6', // Teal
-                        '#2563EB'  // Blue
-                    ],
-                    borderRadius: 6,
-                    barThickness: 30
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            title: function (tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                return Array.isArray(label) ? label.join(' ') : label;
-                            },
-                            label: function (context) {
-                                return context.raw + ' Days';
-                            }
-                        }
-                    }
+        // --- Tech Stack Logic ---
+        function toggleStackView() {
+            const checkbox = document.getElementById('stack-toggle');
+            state.stackView = checkbox.checked ? 'target' : 'legacy';
+
+            // UI State updates
+            const legacyLabel = document.getElementById('label-legacy');
+            const targetLabel = document.getElementById('label-target');
+
+            if (state.stackView === 'target') {
+                legacyLabel.classList.remove('text-slate-900', 'font-bold');
+                legacyLabel.classList.add('text-slate-500');
+                targetLabel.classList.add('text-teal-700', 'font-bold');
+                targetLabel.classList.remove('text-teal-600');
+            } else {
+                targetLabel.classList.remove('text-teal-700', 'font-bold');
+                targetLabel.classList.add('text-teal-600');
+                legacyLabel.classList.add('text-slate-900', 'font-bold');
+                legacyLabel.classList.remove('text-slate-500');
+            }
+
+            renderStack();
+        }
+
+        function renderStack() {
+            const data = stackData[state.stackView];
+            const badges = ['l1', 'l2', 'l3', 'l4'];
+
+            // Update Badges
+            badges.forEach(b => {
+                const el = document.getElementById(`badge-${b}`);
+                if (state.stackView === 'target') {
+                    el.innerText = "Target State";
+                    el.className = b === 'l2' ? "px-2 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded" : "px-2 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded";
+                } else {
+                    el.innerText = "Current Barrier";
+                    el.className = "px-2 py-1 bg-red-100 text-red-800 text-xs font-bold rounded";
+                }
+            });
+
+            // Render Grids
+            ['l1', 'l2', 'l3', 'l4'].forEach(layer => {
+                const container = document.getElementById(`content-${layer}`);
+                container.innerHTML = data[layer].map(item => `
+                    <div class="stack-card bg-white p-4 rounded-lg border-l-4 ${item.color} shadow-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">${item.icon}</span>
+                            <h4 class="font-bold text-slate-800 text-sm">${item.title}</h4>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-snug">${item.desc}</p>
+                    </div>
+                `).join('');
+            });
+        }
+
+        // --- Visualization Logic ---
+
+        function initSummaryChart() {
+            const ctx = document.getElementById('summaryRadarChart').getContext('2d');
+            summaryChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Processing Speed', 'Digital Ease', 'Accessibility', 'Fraud Prevention', 'Cost Efficiency'],
+                    datasets: [{
+                        label: 'Service Canada (Est.)',
+                        data: [30, 45, 60, 50, 40],
+                        fill: true,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // Amber
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    }, {
+                        label: 'Private Sector Avg',
+                        data: [90, 95, 85, 90, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(15, 118, 110, 0.2)', // Teal
+                        borderColor: 'rgb(15, 118, 110)',
+                        pointBackgroundColor: 'rgb(15, 118, 110)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(15, 118, 110)'
+                    }]
                 },
-                scales: {
-                    x: {
-                        grid: { color: '#E2E8F0' }
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
                     },
-                    y: {
-                        grid: { display: false }
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false } // clean look
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // 2. COST CHART (Bar)
-        const costCtx = document.getElementById('costChart').getContext('2d');
-        new Chart(costCtx, {
-            type: 'bar',
-            data: {
-                labels: ['In-Person', 'Contact Center', 'Digital Self-Serve'],
-                datasets: [{
-                    label: 'Cost Per Transaction ($)',
-                    data: [45.00, 12.50, 0.10],
-                    backgroundColor: [
-                        '#2563EB', // Blue
-                        '#60A5FA', // Light Blue
-                        '#14B8A6'  // Teal
-                    ],
-                    borderRadius: 8,
-                    barThickness: 50
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            title: function (tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                return Array.isArray(label) ? label.join(' ') : label;
-                            },
-                            label: function (context) {
-                                return '$' + context.raw.toFixed(2);
+        function updateKPI(category) {
+            // Update UI State
+            document.querySelectorAll('.kpi-btn').forEach(btn => {
+                btn.classList.remove('bg-teal-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-stone-200');
+            });
+            const activeBtn = document.getElementById(`btn-${category}`);
+            activeBtn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-stone-200');
+            activeBtn.classList.add('bg-teal-600', 'text-white');
+
+            // Update Text
+            const data = kpiData[category];
+            document.getElementById('kpi-text-content').innerHTML = `
+                <h3 class="text-xl font-bold text-slate-800 mb-2">${data.title}</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">${data.desc}</p>
+            `;
+            document.getElementById('kpi-opportunity-text').innerText = data.opportunity;
+
+            // Update Chart
+            if (kpiChart) {
+                kpiChart.destroy();
+            }
+
+            const ctx = document.getElementById('kpiBarChart').getContext('2d');
+            kpiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: data.chartLabel,
+                        data: data.data,
+                        backgroundColor: data.colors,
+                        borderRadius: 6,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.parsed.y} ${category === 'digital' ? '%' : (category === 'callcenter' ? 'Mins' : 'Days')}`;
+                                }
                             }
                         }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#E2E8F0' },
-                        ticks: { callback: function (value) { return '$' + value; } }
                     },
-                    x: {
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-
-        // 3. RADAR BENCHMARK
-        const radarCtx = document.getElementById('benchmarkRadar').getContext('2d');
-        new Chart(radarCtx, {
-            type: 'radar',
-            data: {
-                labels: [
-                    formatLabel('Processing Speed', 16),
-                    formatLabel('Digital Adoption', 16),
-                    formatLabel('Fraud Prevention', 16),
-                    formatLabel('Omnichannel Support', 16),
-                    formatLabel('Cost Efficiency', 16)
-                ],
-                datasets: [{
-                    label: 'Service Canada',
-                    data: [30, 42, 50, 40, 35],
-                    fill: true,
-                    backgroundColor: 'rgba(239, 68, 68, 0.2)', // Red tint
-                    borderColor: '#EF4444',
-                    pointBackgroundColor: '#EF4444'
-                }, {
-                    label: 'Private Industry Avg',
-                    data: [90, 85, 80, 85, 90],
-                    fill: true,
-                    backgroundColor: 'rgba(37, 99, 235, 0.2)', // Blue tint
-                    borderColor: '#2563EB',
-                    pointBackgroundColor: '#2563EB'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: '#E2E8F0' },
-                        grid: { color: '#E2E8F0' },
-                        pointLabels: {
-                            font: { size: 11, weight: 600 }
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e7e5e4' }
                         },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            title: function (tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                return Array.isArray(label) ? label.join(' ') : label;
-                            }
+                        x: {
+                            grid: { display: false }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        // 4. ROI FORECAST (Line/Area)
-        const roiCtx = document.getElementById('roiChart').getContext('2d');
-        new Chart(roiCtx, {
-            type: 'line',
-            data: {
-                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
-                datasets: [{
-                    label: 'Cumulative Savings ($ Millions)',
-                    data: [45, 120, 210, 320, 450],
-                    borderColor: '#14B8A6', // Teal
-                    backgroundColor: 'rgba(20, 184, 166, 0.2)',
-                    fill: true,
-                    tension: 0.4,
-                    borderWidth: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            title: function (tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                return Array.isArray(label) ? label.join(' ') : label;
-                            },
-                            label: function (context) {
-                                return '$' + context.raw + 'M Savings';
+        function initROIChart() {
+            const ctx = document.getElementById('roiMixChart').getContext('2d');
+            roiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Current Mix Cost', 'Optimized Mix Cost'],
+                    datasets: [
+                        { label: 'Digital', data: [0, 0], backgroundColor: '#14b8a6' },
+                        { label: 'Phone', data: [0, 0], backgroundColor: '#f59e0b' },
+                        { label: 'In-Person', data: [0, 0], backgroundColor: '#ef4444' }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { callback: (val) => '$' + val / 1000000 + 'M' } },
+                        y: { stacked: true, grid: { display: false } }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.dataset.label + ': $' + (context.raw / 1000000).toFixed(2) + 'M';
+                                }
                             }
                         }
                     }
-                },
-                scales: {
-                    x: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        ticks: { color: '#94A3B8' }
-                    },
-                    y: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        ticks: { color: '#94A3B8', callback: function (val) { return '$' + val + 'M' } }
-                    }
                 }
+            });
+        }
+
+        function calculateROI() {
+            const volume = parseInt(document.getElementById('roi-volume').value);
+            const digitalTarget = parseInt(document.getElementById('slider-digital').value);
+            const automationLevel = parseInt(document.getElementById('slider-auto').value);
+
+            document.getElementById('digital-val').innerText = digitalTarget + '%';
+            document.getElementById('auto-val').innerText = automationLevel + '%';
+
+            const currentMix = { digital: 0.40, phone: 0.40, inPerson: 0.20 };
+            const costs = state.roi.costs;
+
+            const automatedPhoneCost = costs.phone * (1 - (automationLevel * 0.005));
+            const automatedPersonCost = costs.inPerson * (1 - (automationLevel * 0.002));
+
+            const remaining = 100 - digitalTarget;
+            const phoneRatio = currentMix.phone / (currentMix.phone + currentMix.inPerson);
+            const personRatio = currentMix.inPerson / (currentMix.phone + currentMix.inPerson);
+
+            const targetMix = {
+                digital: digitalTarget / 100,
+                phone: (remaining * phoneRatio) / 100,
+                inPerson: (remaining * personRatio) / 100
+            };
+
+            const currentTotal = (volume * currentMix.digital * costs.digital) +
+                (volume * currentMix.phone * costs.phone) +
+                (volume * currentMix.inPerson * costs.inPerson);
+
+            const projectedTotal = (volume * targetMix.digital * costs.digital) +
+                (volume * targetMix.phone * automatedPhoneCost) +
+                (volume * targetMix.inPerson * automatedPersonCost);
+
+            const savings = currentTotal - projectedTotal;
+
+            document.getElementById('cost-current').innerText = '$' + (currentTotal / 1000000).toFixed(1) + 'M';
+            document.getElementById('cost-projected').innerText = '$' + (projectedTotal / 1000000).toFixed(1) + 'M';
+            document.getElementById('savings-val').innerText = '$' + (savings / 1000000).toFixed(1) + 'M';
+            document.getElementById('savings-val').className = savings > 0 ? "text-2xl font-bold text-teal-600" : "text-2xl font-bold text-slate-600";
+
+            if (roiChart) {
+                roiChart.data.datasets[0].data = [
+                    volume * currentMix.digital * costs.digital,
+                    volume * targetMix.digital * costs.digital
+                ];
+                roiChart.data.datasets[1].data = [
+                    volume * currentMix.phone * costs.phone,
+                    volume * targetMix.phone * automatedPhoneCost
+                ];
+                roiChart.data.datasets[2].data = [
+                    volume * currentMix.inPerson * costs.inPerson,
+                    volume * targetMix.inPerson * automatedPersonCost
+                ];
+                roiChart.update();
             }
-        });
+        }
     </script>
 </body>
 
