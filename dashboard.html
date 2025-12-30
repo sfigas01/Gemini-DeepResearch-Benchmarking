@@ -149,6 +149,14 @@
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
 
+        <!-- Breadcrumb -->
+        <div class="mb-4">
+            <a href="index.html"
+                class="inline-flex items-center text-slate-500 hover:text-teal-600 text-sm font-medium transition-colors">
+                &larr; Back to Home
+            </a>
+        </div>
+
         <!-- SECTION 1: EXECUTIVE SUMMARY -->
         <section id="view-summary" class="animate-fade-in block space-y-8">
             <div class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8">
@@ -584,9 +592,9 @@
                         class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
                         <input type="checkbox" name="toggle" id="stack-toggle"
                             class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-stone-300"
-                            onclick="toggleStackView()" />
+                            checked onclick="toggleStackView()" />
                         <label for="stack-toggle"
-                            class="toggle-label block overflow-hidden h-6 rounded-full bg-stone-300 cursor-pointer"></label>
+                            class="toggle-label block overflow-hidden h-6 rounded-full bg-red-400 cursor-pointer"></label>
                     </div>
                     <span id="label-target" class="text-sm font-semibold text-teal-600">View Target State</span>
                 </div>
