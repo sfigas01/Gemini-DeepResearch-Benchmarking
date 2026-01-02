@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure AI Pipeline & Compliance Scanner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: "Trust & Technology" - Deep Slate Blue, Clean White, Soft Gray, Teal Accents -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1e293b;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            max-height: 500px;
+        }
+
+        .pipeline-connector {
+            width: 2px;
+            background-color: #cbd5e1;
+            height: 20px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .pipeline-connector {
+                width: 40px;
+                height: 2px;
+                margin: auto 0;
+            }
+        }
+
+        .stage-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stage-card:hover,
+        .stage-card.active {
+            transform: translateY(-4px);
+            border-color: #0f766e;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom scrollbar for tool lists */
+        .tool-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .tool-list::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50">
+
+    <!-- Navigation / Header -->
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <h1 class="text-2xl font-bold tracking-tight text-teal-400">Secure AI Pipeline <span
+                        class="text-slate-300 font-light">& Compliance Scanner</span></h1>
+                <p class="text-xs text-slate-400 mt-1">Industry Scan: Standards, Tools & Automated Pipelines</p>
+            </div>
+            <nav class="flex space-x-2 md:space-x-6 text-sm font-medium">
+                <a href="index.html" class="hover:text-teal-300 transition-colors">← Back to Home</a>
+                <button onclick="scrollToSection('standards-section')"
+                    class="hover:text-teal-300 transition-colors">Standards</button>
+                <button onclick="scrollToSection('risks-section')" class="hover:text-teal-300 transition-colors">AI
+                    Risks</button>
+                <button onclick="scrollToSection('pipeline-section')"
+                    class="hover:text-teal-300 transition-colors">DevSecMLOps</button>
+                <button onclick="scrollToSection('monitor-section')"
+                    class="hover:text-teal-300 transition-colors">Monitoring</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- Intro Section -->
+        <section class="bg-white rounded-xl shadow-sm p-8 border-l-4 border-teal-500">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">Executive Summary: The Convergence of DevOps & AI
+                Governance</h2>
+            <p class="text-slate-600 leading-relaxed mb-4">
+                As organizations transition from experimental AI to production systems, the landscape of compliance has
+                shifted.
+                We are moving from purely <strong>Infrastructure Security</strong> (SOC2, ISO 27001) to <strong>Model
+                    Governance</strong> (ISO 42001, EU AI Act).
+                This application synthesizes the current industry standards for AI products and maps the toolchain
+                required to automate security checks from prototyping to production release.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                    <div class="text-teal-600 font-bold text-lg mb-1">Standardization</div>
+                    <p class="text-sm text-slate-500">New frameworks like NIST AI RMF and ISO/IEC 42001 are defining
+                        "Safe AI".</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                    <div class="text-teal-600 font-bold text-lg mb-1">Automation</div>
+                    <p class="text-sm text-slate-500">MLOps tools are integrating "Guardrails" directly into CI/CD
+                        pipelines.</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                    <div class="text-teal-600 font-bold text-lg mb-1">Observability</div>
+                    <p class="text-sm text-slate-500">Monitoring has evolved beyond latency to include Drift, Bias, and
+                        Hallucination metrics.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: STANDARDS NAVIGATOR -->
+        <section id="standards-section">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                    <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-2.5 py-0.5 rounded">Analysis</span>
+                    Industry Standards Landscape
+                </h2>
+                <p class="text-slate-600 mt-2">
+                    Explore the dichotomy between foundational security standards and the emerging specific requirements
+                    for Artificial Intelligence systems. Click the tabs to switch contexts.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="flex border-b border-slate-200 bg-slate-50">
+                    <button onclick="updateStandards('general')" id="tab-general"
+                        class="flex-1 py-4 text-center font-semibold text-slate-600 hover:bg-white border-b-2 border-transparent hover:border-teal-500 transition-all active-tab">Foundational
+                        Security</button>
+                    <button onclick="updateStandards('ai')" id="tab-ai"
+                        class="flex-1 py-4 text-center font-semibold text-slate-600 hover:bg-white border-b-2 border-transparent hover:border-teal-500 transition-all">AI
+                        Specific (New)</button>
+                </div>
+
+                <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Dynamic Content Area -->
+                    <div>
+                        <h3 id="std-title" class="text-xl font-bold text-slate-800 mb-2">General Security Standards</h3>
+                        <p id="std-desc" class="text-slate-600 mb-6">Traditional frameworks focus on data
+                            confidentiality, integrity, and availability (CIA triad) for infrastructure and software.
+                        </p>
+
+                        <div id="std-list" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Visualization for Standards Adoption -->
+                    <div class="flex flex-col">
+                        <h4 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4 text-center">
+                            Adoption vs. Complexity</h4>
+                        <div class="chart-container bg-slate-50 rounded-lg p-4 border border-slate-100">
+                            <canvas id="standardsChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 mt-2">Estimated industry adoption rates based on
+                            2024-2025 market scan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AI RISKS VISUALIZATION -->
+        <section id="risks-section">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">The AI Threat Landscape</h2>
+                <p class="text-slate-600 mt-2">
+                    AI applications introduce novel attack vectors that traditional security scanners miss. This radar
+                    chart maps the critical "OWASP Top 10 for LLMs" against standard security domains.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6">
+                    <div class="chart-container h-[450px]">
+                        <canvas id="riskRadarChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col justify-center space-y-4">
+                    <h3 class="font-bold text-lg text-slate-800 border-b pb-2">Key AI Vulnerabilities</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded text-sm">
+                            <span class="font-bold block text-red-700">Prompt Injection</span>
+                            Manipulating LLM inputs to bypass safety guardrails or leak instructions.
+                        </div>
+                        <div class="p-3 bg-orange-50 border-l-4 border-orange-500 rounded text-sm">
+                            <span class="font-bold block text-orange-700">Training Data Poisoning</span>
+                            Tampering with the dataset to introduce backdoors or biases into the model.
+                        </div>
+                        <div class="p-3 bg-amber-50 border-l-4 border-amber-500 rounded text-sm">
+                            <span class="font-bold block text-amber-700">Model Theft</span>
+                            Querying the model excessively to reconstruct its weights or functionality.
+                        </div>
+                        <div class="p-3 bg-blue-50 border-l-4 border-blue-500 rounded text-sm">
+                            <span class="font-bold block text-blue-700">Insecure Output Handling</span>
+                            Accepting LLM output without sanitization, leading to XSS or code execution.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PIPELINE EXPLORER -->
+        <section id="pipeline-section">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Automated DevSecMLOps Pipeline</h2>
+                <p class="text-slate-600 mt-2">
+                    From prototype to production: Select a stage to view the industry-standard tools and compliance
+                    checks required to automate deployment securely.
+                </p>
+            </div>
+
+            <!-- Pipeline Visual Flow -->
+            <div class="bg-white rounded-xl shadow-sm p-8">
+                <!-- Flex container for the stages -->
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-2 overflow-x-auto pb-4">
+
+                    <!-- Stage 1 -->
+                    <div onclick="selectPipelineStage(0)"
+                        class="stage-card active group flex flex-col items-center w-full md:w-1/5 p-4 rounded-lg border-2 border-teal-500 bg-white hover:bg-teal-50"
+                        id="stage-0">
+                        <div
+                            class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold mb-2 text-lg">
+                            1</div>
+                        <h3 class="font-bold text-slate-700 text-center">Prototyping</h3>
+                        <div class="text-xs text-slate-500 text-center mt-1">Experimentation</div>
+                    </div>
+
+                    <div class="pipeline-connector"></div>
+
+                    <!-- Stage 2 -->
+                    <div onclick="selectPipelineStage(1)"
+                        class="stage-card group flex flex-col items-center w-full md:w-1/5 p-4 rounded-lg border-2 border-slate-200 bg-white hover:bg-teal-50"
+                        id="stage-1">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 group-hover:bg-teal-100 group-hover:text-teal-600 flex items-center justify-center font-bold mb-2 text-lg">
+                            2</div>
+                        <h3 class="font-bold text-slate-700 text-center">Dev & Build</h3>
+                        <div class="text-xs text-slate-500 text-center mt-1">CI & Versioning</div>
+                    </div>
+
+                    <div class="pipeline-connector"></div>
+
+                    <!-- Stage 3 -->
+                    <div onclick="selectPipelineStage(2)"
+                        class="stage-card group flex flex-col items-center w-full md:w-1/5 p-4 rounded-lg border-2 border-slate-200 bg-white hover:bg-teal-50"
+                        id="stage-2">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 group-hover:bg-teal-100 group-hover:text-teal-600 flex items-center justify-center font-bold mb-2 text-lg">
+                            3</div>
+                        <h3 class="font-bold text-slate-700 text-center">Test & Audit</h3>
+                        <div class="text-xs text-slate-500 text-center mt-1">Validation Gates</div>
+                    </div>
+
+                    <div class="pipeline-connector"></div>
+
+                    <!-- Stage 4 -->
+                    <div onclick="selectPipelineStage(3)"
+                        class="stage-card group flex flex-col items-center w-full md:w-1/5 p-4 rounded-lg border-2 border-slate-200 bg-white hover:bg-teal-50"
+                        id="stage-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 group-hover:bg-teal-100 group-hover:text-teal-600 flex items-center justify-center font-bold mb-2 text-lg">
+                            4</div>
+                        <h3 class="font-bold text-slate-700 text-center">Deploy</h3>
+                        <div class="text-xs text-slate-500 text-center mt-1">Serving</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Content Panel -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
+                    <div>
+                        <h3 id="pipeline-detail-title" class="text-xl font-bold text-slate-800 mb-4">Phase 1:
+                            Prototyping & Data Prep</h3>
+                        <p id="pipeline-detail-desc" class="text-slate-600 mb-6">
+                            Data Scientists work in notebooks. Security focus is on data sanitation and access control
+                            before any real engineering begins.
+                        </p>
+
+                        <div class="mb-4">
+                            <span
+                                class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2 py-1 rounded uppercase">Standard
+                                Tools</span>
+                            <ul id="pipeline-tools" class="list-disc list-inside mt-2 text-sm text-slate-700 space-y-1">
+                                <!-- JS Populated -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded border border-slate-200 shadow-sm">
+                        <h4 class="text-teal-700 font-bold mb-3 flex items-center">
+                            <span class="text-xl mr-2">🛡️</span> Compliance & Security Checks
+                        </h4>
+                        <ul id="pipeline-checks" class="space-y-3">
+                            <!-- JS Populated -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: MONITORING SIMULATION -->
+        <section id="monitor-section">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Production Monitoring & Observability</h2>
+                <p class="text-slate-600 mt-2">
+                    In AI, "deployment" is not the end. Models decay. This simulation demonstrates how automated tools
+                    (like Arize, WhyLabs, Prometheus) track <strong>Data Drift</strong> and <strong>Performance</strong>
+                    to trigger automated retraining or alerts.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Controls -->
+                <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-4">Simulation Controls</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Traffic Volume</label>
+                            <input type="range" min="1" max="100" value="50" class="w-full accent-teal-600"
+                                id="sim-traffic">
+                        </div>
+                        <button onclick="injectDrift()"
+                            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors text-sm">
+                            Inject Data Drift Event
+                        </button>
+                        <button onclick="resetSimulation()"
+                            class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded transition-colors text-sm">
+                            Reset Simulation
+                        </button>
+
+                        <div class="mt-6 pt-6 border-t border-slate-100">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase">Live Metrics</h4>
+                            <div class="flex justify-between mt-2">
+                                <span class="text-sm text-slate-600">Drift Score (KL):</span>
+                                <span id="metric-drift" class="font-mono font-bold text-slate-800">0.05</span>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-sm text-slate-600">Accuracy:</span>
+                                <span id="metric-accuracy" class="font-mono font-bold text-teal-600">96.2%</span>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-sm text-slate-600">Status:</span>
+                                <span id="metric-status" class="font-bold text-green-500 text-sm">HEALTHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="lg:col-span-3 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <div class="chart-container">
+                        <canvas id="monitorChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-slate-400 text-sm py-12 border-t border-slate-200">
+            <p>&copy; 2024 Secure AI Pipeline Report. Generated for Analysis.</p>
+            <p class="mt-2"><a href="index.html" class="text-teal-600 hover:underline">← Return to Home</a></p>
+        </footer>
+
+    </main>
+
+    <!-- Application Logic -->
+    <script>
+        // --- DATA STORE ---
+
+        const standardsData = {
+            general: {
+                title: "Foundational Security Standards",
+                desc: "These frameworks are the bedrock of IT security. While not AI-specific, they provide the necessary infrastructure controls (access, encryption, logging) that AI systems must sit upon.",
+                items: [
+                    { name: "ISO/IEC 27001", role: "Information Security Management System (ISMS). Focus on process, risk assessment, and continuous improvement.", icon: "🔒" },
+                    { name: "SOC 2 Type II", role: "Trust Services Criteria. Crucial for SaaS AI providers to prove security, availability, and confidentiality to enterprise clients.", icon: "📋" },
+                    { name: "GDPR & CCPA", role: "Data Privacy. Restricts how data is collected for training (Article 22: Rights regarding automated decision making).", icon: "🛡️" },
+                    { name: "HIPAA", role: "Healthcare. Strict controls on PHI (Protected Health Information) if used in medical AI models.", icon: "🏥" }
+                ],
+                chartData: [85, 70, 95, 60] // Adoption rates
+            },
+            ai: {
+                title: "Emerging AI-Specific Standards",
+                desc: "New frameworks addressing risks unique to probabilistic systems: Hallucination, Bias, Drift, and Lack of Explainability.",
+                items: [
+                    { name: "ISO/IEC 42001", role: "The first global AI Management System standard (2023). Focuses on ethical usage, transparency, and lifecycle management.", icon: "🤖" },
+                    { name: "NIST AI RMF", role: "Risk Management Framework (Map, Measure, Manage, Govern). Voluntary but highly influential in US Gov and Enterprise.", icon: "🇺🇸" },
+                    { name: "EU AI Act", role: "Regulatory Law. Categorizes AI by risk (Unacceptable, High, Limited). High risk requires conformity assessments and strict data governance.", icon: "🇪🇺" },
+                    { name: "OWASP LLM Top 10", role: "Security checklist specifically for Large Language Models (Prompt Injection, Supply Chain vulns).", icon: "🐞" }
+                ],
+                chartData: [15, 40, 60, 55] // Adoption rates
+            }
+        };
+
+        const pipelineData = [
+            {
+                title: "Phase 1: Prototyping & Exploration",
+                desc: "The 'Sandbox' phase. Data scientists iterate rapidly. Security is often lax here, making it a critical point to enforce guardrails without stifling innovation.",
+                tools: ["JupyterHub / Google Colab (IDE)", "Hugging Face (Model Hub)", "Streamlit / Gradio (Demo UI)", "Pandas / NumPy (Data Prep)"],
+                checks: [
+                    { title: "PII Scanning", detail: "Scan training data for Personally Identifiable Information before it hits the model (e.g., Microsoft Presidio)." },
+                    { title: "License Compliance", detail: "Check open-source model licenses (Apache 2.0 vs LLaMA Community) to ensure commercial viability." },
+                    { title: "Access Control", detail: "Ensure RBAC is applied to raw data lakes (S3/Blob Storage)." }
+                ]
+            },
+            {
+                title: "Phase 2: Development & Build",
+                desc: "Moving from notebooks to engineered code. This is where MLOps begins: versioning data, code, and model artifacts together.",
+                tools: ["Git & DVC (Data Version Control)", "MLflow / Weights & Biases (Experiment Tracking)", "Docker (Containerization)", "PyTest (Unit Testing)"],
+                checks: [
+                    { title: "Static Analysis (SAST)", detail: "Scan Python code for hardcoded secrets and vulnerabilities (e.g., Snyk, Bandit)." },
+                    { title: "Dependency Scanning", detail: "Check Python libraries (pip/conda) for known CVEs." },
+                    { title: "Model Card Generation", detail: "Automated creation of documentation defining model intent, limitations, and training data." }
+                ]
+            },
+            {
+                title: "Phase 3: Testing & Audit",
+                desc: "The Quality Gate. Before deployment, the model is stress-tested not just for accuracy, but for security and fairness.",
+                tools: ["Jenkins / GitHub Actions (CI/CD)", "DeepChecks / Great Expectations (Data Validation)", "TextAttack (Adversarial Testing)"],
+                checks: [
+                    { title: "Adversarial Robustness", detail: "Attack the model with perturbed inputs to see if it breaks or leaks data." },
+                    { title: "Bias & Fairness Audit", detail: "Check statistical parity across protected groups (Gender, Race, Age)." },
+                    { title: "Explainability (XAI)", detail: "Generate SHAP/LIME values to ensure the model isn't a 'black box' for critical decisions." }
+                ]
+            },
+            {
+                title: "Phase 4: Deployment & Serving",
+                desc: "Production. The model is wrapped in an API and scaled. The focus shifts to infrastructure security and latency.",
+                tools: ["Kubernetes / KServe (Orchestration)", "TorchServe / Triton (Inference Servers)", "Terraform (IaC)", "AWS SageMaker / Azure ML"],
+                checks: [
+                    { title: "Container Scanning", detail: "Scan Docker images for vulnerabilities before spinning up pods." },
+                    { title: "Endpoint Protection", detail: "Rate limiting and API Authentication (OAuth/JWT) to prevent DoS." },
+                    { title: "Secure Enclaves", detail: "Using Confidential Computing (TEE) for sensitive inference tasks." }
+                ]
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let currentStandard = 'general';
+        let currentPipelineStage = 0;
+        let standardsChartInstance = null;
+        let monitorChartInstance = null;
+        let riskRadarChartInstance = null;
+
+        // Simulation Vars
+        let driftValue = 0.05; // 0 to 1
+        let accuracyValue = 0.98; // 0 to 1
+        let timeStep = 0;
+        let isDrifting = false;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initStandardsChart();
+            updateStandards('general');
+
+            initRiskChart();
+
+            renderPipelineStage(0);
+
+            initMonitorChart();
+            setInterval(updateSimulation, 1000); // 1 sec tick
+        });
+
+        // --- SECTION 1: STANDARDS LOGIC ---
+        function updateStandards(type) {
+            currentStandard = type;
+            const data = standardsData[type];
+
+            // UI Toggle styling
+            document.getElementById('tab-general').className = type === 'general'
+                ? "flex-1 py-4 text-center font-semibold text-teal-700 bg-white border-b-2 border-teal-500 transition-all shadow-sm"
+                : "flex-1 py-4 text-center font-semibold text-slate-500 hover:text-teal-600 border-b-2 border-transparent transition-all";
+
+            document.getElementById('tab-ai').className = type === 'ai'
+                ? "flex-1 py-4 text-center font-semibold text-teal-700 bg-white border-b-2 border-teal-500 transition-all shadow-sm"
+                : "flex-1 py-4 text-center font-semibold text-slate-500 hover:text-teal-600 border-b-2 border-transparent transition-all";
+
+            // Content Update
+            document.getElementById('std-title').innerText = data.title;
+            document.getElementById('std-desc').innerText = data.desc;
+
+            const listContainer = document.getElementById('std-list');
+            listContainer.innerHTML = '';
+
+            data.items.forEach(item => {
+                listContainer.innerHTML += `
+                    <div class="flex items-start p-3 bg-white border border-slate-100 rounded-lg shadow-sm hover:border-teal-300 transition-colors">
+                        <div class="text-2xl mr-3">${item.icon}</div>
+                        <div>
+                            <h5 class="font-bold text-slate-800 text-sm">${item.name}</h5>
+                            <p class="text-xs text-slate-500 mt-1">${item.role}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Chart Update
+            updateStandardsChart(data.chartData);
+        }
+
+        function initStandardsChart() {
+            const ctx = document.getElementById('standardsChart').getContext('2d');
+            standardsChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Infrastructure', 'Process/Governance', 'Data Privacy', 'Specific Controls'],
+                    datasets: [{
+                        label: 'Adoption / Maturity Level (%)',
+                        data: standardsData.general.chartData,
+                        backgroundColor: '#14b8a6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function updateStandardsChart(newData) {
+            standardsChartInstance.data.datasets[0].data = newData;
+            standardsChartInstance.update();
+        }
+
+        // --- SECTION 2: RISK RADAR LOGIC ---
+        function initRiskChart() {
+            const ctx = document.getElementById('riskRadarChart').getContext('2d');
+            riskRadarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Confidentiality',
+                        'Integrity (Data)',
+                        'Availability',
+                        'Fairness/Bias',
+                        'Explainability',
+                        'Robustness'
+                    ],
+                    datasets: [{
+                        label: 'Traditional Software Risk',
+                        data: [90, 80, 85, 20, 30, 70],
+                        fill: true,
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                        borderColor: 'rgb(148, 163, 184)',
+                        pointBackgroundColor: 'rgb(148, 163, 184)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(148, 163, 184)'
+                    }, {
+                        label: 'Generative AI Risk Profile',
+                        data: [70, 95, 60, 90, 95, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                        borderColor: 'rgb(20, 184, 166)',
+                        pointBackgroundColor: 'rgb(20, 184, 166)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(20, 184, 166)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: {
+                                font: { size: 12, weight: 'bold' },
+                                color: '#475569'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- SECTION 3: PIPELINE LOGIC ---
+        function selectPipelineStage(index) {
+            currentPipelineStage = index;
+            renderPipelineStage(index);
+        }
+
+        function renderPipelineStage(index) {
+            // Update Card Styles
+            for (let i = 0; i < 4; i++) {
+                const el = document.getElementById(`stage-${i}`);
+                const circle = el.querySelector('div');
+                if (i === index) {
+                    el.classList.add('border-teal-500', 'bg-teal-50');
+                    el.classList.remove('border-slate-200', 'bg-white');
+                    circle.classList.add('bg-teal-100', 'text-teal-600');
+                    circle.classList.remove('bg-slate-100', 'text-slate-500');
+                } else {
+                    el.classList.remove('border-teal-500', 'bg-teal-50', 'active');
+                    el.classList.add('border-slate-200', 'bg-white');
+                    circle.classList.remove('bg-teal-100', 'text-teal-600');
+                    circle.classList.add('bg-slate-100', 'text-slate-500');
+                }
+            }
+
+            // Update Content
+            const data = pipelineData[index];
+            document.getElementById('pipeline-detail-title').innerText = data.title;
+            document.getElementById('pipeline-detail-desc').innerText = data.desc;
+
+            const toolsList = document.getElementById('pipeline-tools');
+            toolsList.innerHTML = data.tools.map(t => `<li>${t}</li>`).join('');
+
+            const checksList = document.getElementById('pipeline-checks');
+            checksList.innerHTML = data.checks.map(c => `
+                <li class="bg-slate-50 p-3 rounded border border-slate-100 hover:border-teal-200 transition-colors">
+                    <div class="font-bold text-slate-700 text-sm">${c.title}</div>
+                    <div class="text-xs text-slate-500 mt-1">${c.detail}</div>
+                </li>
+            `).join('');
+        }
+
+        // --- SECTION 4: MONITORING LOGIC ---
+        function initMonitorChart() {
+            const ctx = document.getElementById('monitorChart').getContext('2d');
+
+            const initialLabels = Array.from({ length: 20 }, (_, i) => i);
+            const initialDrift = Array(20).fill(0.05);
+            const initialAcc = Array(20).fill(0.95);
+
+            monitorChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: initialLabels,
+                    datasets: [
+                        {
+                            label: 'Model Accuracy',
+                            data: initialAcc,
+                            borderColor: '#14b8a6',
+                            backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                            borderWidth: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Drift Score (KL Divergence)',
+                            data: initialDrift,
+                            borderColor: '#f97316',
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 500 },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            min: 0, max: 1,
+                            title: { display: true, text: 'Accuracy' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0, max: 1,
+                            grid: { drawOnChartArea: false },
+                            title: { display: true, text: 'Drift Score' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function injectDrift() {
+            isDrifting = true;
+        }
+
+        function resetSimulation() {
+            isDrifting = false;
+            driftValue = 0.05;
+            accuracyValue = 0.96;
+        }
+
+        function updateSimulation() {
+            timeStep++;
+
+            // Simulation Logic
+            if (isDrifting) {
+                driftValue = Math.min(driftValue + 0.05, 0.9); // Drift goes up
+                accuracyValue = Math.max(accuracyValue - 0.03, 0.60); // Accuracy goes down
+            } else {
+                // Normal fluctuation
+                driftValue = 0.02 + Math.random() * 0.05;
+                accuracyValue = 0.94 + Math.random() * 0.04;
+            }
+
+            // Update DOM text
+            document.getElementById('metric-drift').innerText = driftValue.toFixed(3);
+            document.getElementById('metric-accuracy').innerText = (accuracyValue * 100).toFixed(1) + '%';
+
+            const statusEl = document.getElementById('metric-status');
+            if (driftValue > 0.3) {
+                statusEl.innerText = "CRITICAL DRIFT";
+                statusEl.className = "font-bold text-red-600 text-sm animate-pulse";
+            } else if (driftValue > 0.15) {
+                statusEl.innerText = "WARNING";
+                statusEl.className = "font-bold text-orange-500 text-sm";
+            } else {
+                statusEl.innerText = "HEALTHY";
+                statusEl.className = "font-bold text-green-500 text-sm";
+            }
+
+            // Update Chart
+            const chart = monitorChartInstance;
+
+            // Remove oldest
+            chart.data.labels.shift();
+            chart.data.datasets[0].data.shift();
+            chart.data.datasets[1].data.shift();
+
+            // Add newest
+            chart.data.labels.push(timeStep);
+            chart.data.datasets[0].data.push(accuracyValue);
+            chart.data.datasets[1].data.push(driftValue);
+
+            chart.update('none'); // 'none' for performance
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
